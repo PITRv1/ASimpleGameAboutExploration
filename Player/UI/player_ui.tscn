@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsef5yewsks8e"]
+
+[ext_resource type="Script" uid="uid://dkhpv80vnq3sl" path="res://Player/UI/player_ui_controller.gd" id="1_qcm1t"]
+[ext_resource type="Script" uid="uid://b15g5254dc8yc" path="res://Player/UI/pause_menu.gd" id="2_agak2"]
+[ext_resource type="Script" uid="uid://cu3xm8gc7cbq0" path="res://Player/UI/player_hud.gd" id="3_2c8bc"]
+
+[node name="PlayerUI" type="Control" node_paths=PackedStringArray("pause_menu")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qcm1t")
+pause_menu = NodePath("PauseMenu")
+
+[node name="PlayerHud" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_2c8bc")
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_agak2")
+
+[node name="Background" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.278431)
+
+[node name="Control" type="Control" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = -450.0
+offset_right = 413.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.775
+offset_right = 210.775
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 96
+text = "Resume"
+
+[connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="VisibiliyChanged"]
+[connection signal="pressed" from="PauseMenu/Control/ResumeButton" to="." method="inputHandelerOnEscapePressed"]

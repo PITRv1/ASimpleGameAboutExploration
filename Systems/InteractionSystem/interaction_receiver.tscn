@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1nkr62gaodmv"]
+
+[ext_resource type="Script" uid="uid://bf1xe7ge8jvfd" path="res://Systems/InteractionSystem/interaction_receiver.gd" id="1_5h5uc"]
+
+[node name="InteractionReceiver" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_5h5uc")

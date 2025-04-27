@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=3 uid="uid://nwtjv17dqyx5"]
+
+[ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
+[ext_resource type="Resource" uid="uid://dv1rjy8aitkm3" path="res://InputMappings/UIInput.tres" id="2_k53q1"]
+[ext_resource type="Script" uid="uid://did5rgkshjuht" path="res://Player/UI/ui_input_handeler.gd" id="3_btcbx"]
+[ext_resource type="Resource" uid="uid://bus4c6jepmsml" path="res://InputMappings/MovementInput.tres" id="3_fhl08"]
+[ext_resource type="Resource" uid="uid://cf42us6fwy6ja" path="res://InputMappings/InteractionInput.tres" id="4_00tjw"]
+[ext_resource type="Resource" uid="uid://cnffjd268yn4y" path="res://InputMappings/escape.tres" id="4_gwnis"]
+[ext_resource type="Resource" uid="uid://dv0pfqf48ikth" path="res://InputMappings/jump.tres" id="4_vtle1"]
+[ext_resource type="PackedScene" uid="uid://dgyc7i8ilijod" path="res://Systems/InteractionSystem/interaction_initiator.tscn" id="5_od3ui"]
+[ext_resource type="Resource" uid="uid://cveufc2cx61jb" path="res://InputMappings/interact.tres" id="10_x3vf3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8h54"]
+transparency = 1
+albedo_color = Color(0, 0.581789, 0.822063, 0.239216)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4ntmi"]
+material = SubResource("StandardMaterial3D_l8h54")
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_l8h54")
+UIInput = ExtResource("2_k53q1")
+MovementInput = ExtResource("3_fhl08")
+InteractionInput = ExtResource("4_00tjw")
+jumpAction = ExtResource("4_vtle1")
+look_sensitivity = 0.005
+current_speed = 13.0
+max_air_speed = 30.0
+air_acceleration = 1000
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4ntmi")
+debug_color = Color(7.21961e-07, 0.409526, 0.505812, 0.419608)
+
+[node name="PlayerVisual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_4ntmi")
+
+[node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55918, 0)
+
+[node name="CameraSmooth" type="Node3D" parent="Head"]
+unique_name_in_owner = true
+
+[node name="PlayerCamera" type="Camera3D" parent="Head/CameraSmooth"]
+unique_name_in_owner = true
+
+[node name="InteractionInitiator" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("inputHandeler") instance=ExtResource("5_od3ui")]
+inputHandeler = NodePath("../../../../InputHandeler")
+
+[node name="StairsBelowRayCast" type="RayCast3D" parent="."]
+
+[node name="StairsAheadRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516717, -0.73318)
+
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("input_handeler") instance=ExtResource("2_4ntmi")]
+input_handeler = NodePath("../InputHandeler")
+
+[node name="InputHandeler" type="Node" parent="."]
+script = ExtResource("3_btcbx")
+escapeAction = ExtResource("4_gwnis")
+interactAction = ExtResource("10_x3vf3")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.15
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

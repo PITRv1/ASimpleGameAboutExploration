@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgyc7i8ilijod"]
+
+[ext_resource type="Script" uid="uid://ccc5kequ11i7i" path="res://Systems/InteractionSystem/interaction_initiator.gd" id="1_toja2"]
+
+[node name="InteractionInitiator" type="RayCast3D"]
+target_position = Vector3(0, 0, -4)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_toja2")
