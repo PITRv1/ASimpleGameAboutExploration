@@ -1,5 +1,7 @@
 extends Node3D
 class_name InteractionReceiver
 
+signal OnInteractDetected
+
 func triggerInteraction():
-	print("I recieved an interaction")
+	OnInteractDetected.emit()

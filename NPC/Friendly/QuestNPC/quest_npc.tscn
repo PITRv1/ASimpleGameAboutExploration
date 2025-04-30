@@ -28,8 +28,9 @@ size = Vector3(0.585, 0.22, 0.21)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kejyp"]
 
-[node name="QuestNPC" type="CharacterBody3D"]
+[node name="QuestNPC" type="CharacterBody3D" node_paths=PackedStringArray("interactionReciver")]
 script = ExtResource("1_icjnx")
+interactionReciver = NodePath("InteractionReceiver")
 
 [node name="NPCCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

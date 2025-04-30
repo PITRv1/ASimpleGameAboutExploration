@@ -1,10 +1,44 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=3 format=3 uid="uid://cf42us6fwy6ja"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=13 format=3 uid="uid://cf42us6fwy6ja"]
 
 [ext_resource type="Script" uid="uid://bq18tgv1chfnh" path="res://addons/guide/guide_action_mapping.gd" id="1_uppr2"]
 [ext_resource type="Script" uid="uid://v4fe3cd87c1w" path="res://addons/guide/guide_mapping_context.gd" id="2_kmp7h"]
+[ext_resource type="Resource" uid="uid://cveufc2cx61jb" path="res://InputMappings/interact.tres" id="2_ucrjo"]
+[ext_resource type="Script" uid="uid://c7iui3adfqspt" path="res://addons/guide/guide_input_mapping.gd" id="3_dqjrw"]
+[ext_resource type="Script" uid="uid://bp7dnqvmmlu6g" path="res://addons/guide/inputs/guide_input_key.gd" id="4_1dqow"]
+[ext_resource type="Script" uid="uid://bxyvxp48pkl3l" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_vuecq"]
+[ext_resource type="Script" uid="uid://bysvbee7fdlm5" path="res://addons/guide/triggers/guide_trigger.gd" id="6_g6rre"]
+[ext_resource type="Script" uid="uid://cn64wgdiu557a" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="7_ucrjo"]
+
+[sub_resource type="Resource" id="Resource_hac8c"]
+script = ExtResource("4_1dqow")
+key = 69
+shift = false
+control = false
+alt = false
+meta = false
+allow_additional_modifiers = true
+
+[sub_resource type="Resource" id="Resource_dqjrw"]
+script = ExtResource("7_ucrjo")
+actuation_threshold = 0.5
+
+[sub_resource type="Resource" id="Resource_h6ks6"]
+script = ExtResource("3_dqjrw")
+override_action_settings = false
+is_remappable = false
+display_name = ""
+display_category = ""
+input = SubResource("Resource_hac8c")
+modifiers = Array[ExtResource("5_vuecq")]([])
+triggers = Array[ExtResource("6_g6rre")]([SubResource("Resource_dqjrw")])
+
+[sub_resource type="Resource" id="Resource_lauop"]
+script = ExtResource("1_uppr2")
+action = ExtResource("2_ucrjo")
+input_mappings = Array[ExtResource("3_dqjrw")]([SubResource("Resource_h6ks6")])
 
 [resource]
 script = ExtResource("2_kmp7h")
 display_name = ""
-mappings = Array[ExtResource("1_uppr2")]([])
+mappings = Array[ExtResource("1_uppr2")]([SubResource("Resource_lauop")])
 metadata/_custom_type_script = "uid://v4fe3cd87c1w"
