@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nwtjv17dqyx5"]
+[gd_scene load_steps=22 format=3 uid="uid://nwtjv17dqyx5"]
 
 [ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
@@ -17,8 +17,6 @@
 [ext_resource type="Script" uid="uid://bnfqu4tt64gmp" path="res://Systems/SaverLoader System/game_saver.gd" id="12_pisgm"]
 [ext_resource type="Resource" uid="uid://dah8042kwp2tk" path="res://InputMappings/attack.tres" id="14_lfmf2"]
 [ext_resource type="Resource" uid="uid://g3kescivuyi5" path="res://InputMappings/aim_down_sites.tres" id="15_pisgm"]
-[ext_resource type="PackedScene" uid="uid://d28w1uawnetlh" path="res://Systems/Quest system/quest_tracker.tscn" id="18_b1ygp"]
-[ext_resource type="Script" uid="uid://boj8atskudkmk" path="res://Player/inventory.gd" id="19_o28un"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
@@ -32,7 +30,7 @@ material = SubResource("StandardMaterial3D_l8h54")
 [sub_resource type="BoxShape3D" id="BoxShape3D_gu6f8"]
 size = Vector3(1, 2, 1)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "quest_tracker", "inventory")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
 UIInput = ExtResource("2_k53q1")
@@ -41,13 +39,10 @@ InteractionInput = ExtResource("4_00tjw")
 WeaponsInput = ExtResource("5_gu6f8")
 jumpAction = ExtResource("4_vtle1")
 weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
-quest_tracker = NodePath("Utilities/QuestTracker")
-inventory = NodePath("Utilities/Inventory")
 look_sensitivity = 0.005
 current_speed = 13.0
-air_cap = 1.0
-air_accel = 3000.0
-air_move_speed = 1000.0
+max_air_speed = 30.0
+air_acceleration = 1000
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -71,9 +66,11 @@ unique_name_in_owner = true
 [node name="InteractionInitiator" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("inputHandeler") instance=ExtResource("5_od3ui")]
 inputHandeler = NodePath("../../../../Utilities/InputHandeler")
 
-[node name="WeaponController" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler", "saver_loader") instance=ExtResource("7_p5o4e")]
+[node name="WeaponController" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler") instance=ExtResource("7_p5o4e")]
 input_handeler = NodePath("../../../../Utilities/InputHandeler")
-saver_loader = NodePath("../../../../Utilities/SaverLoader")
+
+[node name="HealthComponent" parent="Head" instance=ExtResource("11_5htga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55918, 0)
 
 [node name="StairsBelowRayCast" type="RayCast3D" parent="."]
 
@@ -81,12 +78,23 @@ saver_loader = NodePath("../../../../Utilities/SaverLoader")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516717, -0.73318)
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("input_handeler") instance=ExtResource("2_4ntmi")]
+mouse_filter = 2
 input_handeler = NodePath("../Utilities/InputHandeler")
 
-[node name="HealthComponent" parent="." instance=ExtResource("11_5htga")]
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.15
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_p5o4e")]
-health_component = NodePath("../HealthComponent")
+health_component = NodePath("../Head/HealthComponent")
 parentIsPlayer = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
@@ -105,22 +113,5 @@ interactAction = ExtResource("10_x3vf3")
 attackAction = ExtResource("14_lfmf2")
 adsAction = ExtResource("15_pisgm")
 
-[node name="QuestTracker" parent="Utilities" instance=ExtResource("18_b1ygp")]
-
-[node name="Timers" type="Node" parent="Utilities"]
-
-[node name="JumpBufferTimer" type="Timer" parent="Utilities/Timers"]
-unique_name_in_owner = true
-wait_time = 0.15
-one_shot = true
-
-[node name="CoyoteTimer" type="Timer" parent="Utilities/Timers"]
-unique_name_in_owner = true
-wait_time = 0.1
-one_shot = true
-
-[node name="Inventory" type="Node" parent="Utilities"]
-script = ExtResource("19_o28un")
-
-[connection signal="timeout" from="Utilities/Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
-[connection signal="timeout" from="Utilities/Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

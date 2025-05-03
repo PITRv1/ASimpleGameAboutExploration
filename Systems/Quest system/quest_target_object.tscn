@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://da71cb620nk4w"]
+
+[ext_resource type="Script" uid="uid://dstp2svvmmqbs" path="res://Systems/Quest system/quest_target_object.gd" id="1_l5cdl"]
+[ext_resource type="PackedScene" uid="uid://d1nkr62gaodmv" path="res://Systems/InteractionSystem/interaction_receiver.tscn" id="2_jw8bf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1ald"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vgdsm"]
+radius = 0.682646
+
+[node name="QuestTargetObject" type="Node3D"]
+script = ExtResource("1_l5cdl")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual"]
+mesh = SubResource("SphereMesh_v1ald")
+
+[node name="InteractionReceiver" parent="." instance=ExtResource("2_jw8bf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionReceiver"]
+shape = SubResource("SphereShape3D_vgdsm")
+debug_color = Color(0.631463, 0.344968, 1, 0.42)
+
+[connection signal="OnInteractDetected" from="InteractionReceiver" to="." method="collect"]

@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://bh5ly27gkyv5y"]
+
+[ext_resource type="Script" uid="uid://bsjpyvutg8p06" path="res://Assets/Weapons/Shovel/shovel_weapon.gd" id="1_ygasu"]
+[ext_resource type="PackedScene" uid="uid://tdopvlvvjdia" path="res://Assets/Weapons/Shovel/shovel.glb" id="2_0j4be"]
+[ext_resource type="PackedScene" uid="uid://q7gwvvdltf1o" path="res://Systems/Components/hitbox_component.tscn" id="3_u0any"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jgjy2"]
+size = Vector3(0.317383, 0.619675, 0.272949)
+
+[sub_resource type="Animation" id="Animation_jgjy2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u0any"]
+resource_name = "attack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enableHitbox"
+}, {
+"args": [],
+"method": &"disableHitbox"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.37532, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgjy2"]
+_data = {
+&"RESET": SubResource("Animation_jgjy2"),
+&"attack": SubResource("Animation_u0any")
+}
+
+[node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("hitbox_component", "animation_player")]
+script = ExtResource("1_ygasu")
+weapon_position = Vector3(0.537, -0.507, -0.655)
+hitbox_component = NodePath("HitboxComponent")
+animation_player = NodePath("AnimationPlayer")
+damage = 100.0
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="shovel" parent="Visual" instance=ExtResource("2_0j4be")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_u0any")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655746, -0.000244141)
+shape = SubResource("BoxShape3D_jgjy2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jgjy2")
+}
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

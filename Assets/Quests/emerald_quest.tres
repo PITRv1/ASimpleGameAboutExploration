@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://b1mofs0m0tqm3"]
+
+[ext_resource type="Script" uid="uid://caw11yaoq5m74" path="res://Systems/Quest system/quest_resource_template.gd" id="1_xm1wu"]
+
+[resource]
+script = ExtResource("1_xm1wu")
+questName = "Emerald Quest"
+rewardMoneyAmount = 1000
+questTargetObjectID = 1
+questColor = Color(1.20327e-07, 0.52449, 7.70092e-07, 1)
+metadata/_custom_type_script = "uid://caw11yaoq5m74"

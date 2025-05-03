@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d28w1uawnetlh"]
+
+[ext_resource type="Script" uid="uid://4uoc1py6ylxo" path="res://Systems/Quest system/quest_tracker.gd" id="1_uecur"]
+
+[node name="QuestTracker" type="Node"]
+script = ExtResource("1_uecur")

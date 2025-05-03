@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://btg5ip7iujl7o"]
+
+[ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="1_cq2wu"]
+[ext_resource type="Script" uid="uid://bybed8dxi62l0" path="res://NPC/Agressiv/SmallGoul/small_goul.gd" id="1_nrdv7"]
+[ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="2_54crd"]
+[ext_resource type="PackedScene" uid="uid://q7gwvvdltf1o" path="res://Systems/Components/hitbox_component.tscn" id="3_54crd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1ocg"]
+transparency = 1
+albedo_color = Color(1, 0, 0.0166664, 0.239216)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a1ocg"]
+material = SubResource("StandardMaterial3D_a1ocg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icjnx"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a1ocg"]
+material = SubResource("StandardMaterial3D_icjnx")
+size = Vector3(0.585, 0.22, 0.21)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1wtp0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nrdv7"]
+size = Vector3(1, 1.99316, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_54crd"]
+
+[node name="SmallGoul" type="CharacterBody3D"]
+script = ExtResource("1_nrdv7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_a1ocg")
+
+[node name="NPCVisuals2" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55474, -0.380156)
+mesh = SubResource("BoxMesh_a1ocg")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1wtp0")
+debug_color = Color(0.997314, 0, 0.168662, 0.42)
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_cq2wu")]
+health = 100.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_54crd")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_nrdv7")
+debug_color = Color(0.999187, 0, 0.120993, 0.42)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_54crd")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06207, -1.18301)
+shape = SubResource("BoxShape3D_54crd")
+debug_color = Color(0.980463, 0, 0.379459, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

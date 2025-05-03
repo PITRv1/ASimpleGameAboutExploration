@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d32ooqesmbk2u"]
+
+[ext_resource type="Script" uid="uid://buykryi77nj4b" path="res://Systems/Quest system/quest_giver.gd" id="1_ocl8q"]
+
+[node name="QuestGiver" type="Node"]
+script = ExtResource("1_ocl8q")

@@ -5,9 +5,15 @@ extends CharacterBody3D
 @export var UIInput : GUIDEMappingContext
 @export var MovementInput : GUIDEMappingContext
 @export var InteractionInput : GUIDEMappingContext
+@export var WeaponsInput : GUIDEMappingContext
 
 @export_category("Input Actions")
 @export var jumpAction : GUIDEAction
+
+@export_category("Controllers")
+@export var weapon_controller : WeaponController
+@export var quest_tracker : QuestTracker
+@export var inventory : Inventory
 
 
 @export_category("Camera")
@@ -29,13 +35,17 @@ extends CharacterBody3D
 @export var ground_friction := 6.0
 
 @export_group("Air")
-@export_range(0.0,100.0, .1) var max_air_speed
-@export var air_acceleration := 750
+@export var air_cap := 0.85
+@export var air_accel := 800.0
+@export var air_move_speed := 500.0
+
+
 
 ########################################################
 @onready var camera : Camera3D = %PlayerCamera
 @onready var stairs_ahead_raycast: RayCast3D = $StairsAheadRayCast
 @onready var stairs_below_raycast: RayCast3D = $StairsBelowRayCast
+
 
 #Saved inputs and directions
 var input_dir := Vector2.ZERO
@@ -71,6 +81,8 @@ func _ready():
 	GUIDE.enable_mapping_context(UIInput)
 	GUIDE.enable_mapping_context(MovementInput)
 	GUIDE.enable_mapping_context(InteractionInput)
+	GUIDE.enable_mapping_context(WeaponsInput)
+
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -200,15 +212,15 @@ func _handle_ground_physics(delta: float) -> void:
 	friction(0.0, ground_friction, delta)
 
 func _handle_air_physics(delta: float) -> void:
-	var wish_speed = Vector3(input_dir.x, 0.0, input_dir.y).length()
+	var cur_speed_in_wish_dir = self.velocity.dot(wish_dir)
+	var capped_speed = min((air_move_speed * wish_dir).length(), air_cap)
 
-	var current_air_speed = self.velocity.dot(wish_dir)
-	var add_speed = max(wish_speed - current_air_speed, 0.0)
+	var add_speed_till_cap = capped_speed - cur_speed_in_wish_dir
+	if add_speed_till_cap > 0:
+		var accel_speed = air_accel * air_move_speed * delta # Usually is adding this one.
+		accel_speed = min(accel_speed, add_speed_till_cap) # Works ok without this but sticking to the recipe
+		self.velocity += accel_speed * wish_dir
 
-	var accel_speed = air_acceleration * wish_speed * delta
-	accel_speed = min(accel_speed, add_speed)
-
-	self.velocity += wish_dir * accel_speed
 
 func _handle_jump_physics() -> void:
 	if is_on_floor():

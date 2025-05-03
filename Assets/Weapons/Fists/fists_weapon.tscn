@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cge0c7hlr8x21"]
+
+[ext_resource type="Script" uid="uid://bobs7n5w37uk" path="res://Assets/Weapons/Fists/fists_weapon.gd" id="1_82wox"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_82wox"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="FistsWeapon" type="Node3D"]
+script = ExtResource("1_82wox")
+weapon_position = Vector3(0, 0, 0.655)
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0844291, 0, 0)
+mesh = SubResource("BoxMesh_82wox")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106931, 0, 0)
+mesh = SubResource("BoxMesh_82wox")
