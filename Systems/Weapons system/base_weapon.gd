@@ -5,6 +5,8 @@ class_name BaseWeapon
 @export var hitbox_component : HitboxComponent
 @export var animation_player : AnimationPlayer
 
+
+
 @export_category("Weapon Parameters")
 @export var damage : float
 

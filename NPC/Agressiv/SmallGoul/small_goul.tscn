@@ -28,8 +28,12 @@ size = Vector3(1, 1.99316, 1)
 
 [node name="SmallGoul" type="CharacterBody3D"]
 script = ExtResource("1_nrdv7")
+MOVE_SPEED = 5.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+radius = 1.42
+neighbor_distance = 142.16
+use_3d_avoidance = true
 
 [node name="Visual" type="Node3D" parent="."]
 
