@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0t6vdas64nli"]
+[gd_scene load_steps=20 format=3 uid="uid://b0t6vdas64nli"]
 
 [ext_resource type="Script" uid="uid://c83omarf6f48w" path="res://NPC/Friendly/QuestNPC/quest_npc.gd" id="1_icjnx"]
 [ext_resource type="PackedScene" uid="uid://d1nkr62gaodmv" path="res://Systems/InteractionSystem/interaction_receiver.tscn" id="2_kejyp"]
+[ext_resource type="Shader" uid="uid://d4k1uhpn8b101" path="res://Assets/PostProcessingEffects/simpleOutline.gdshader" id="2_n4fqd"]
+[ext_resource type="Shader" uid="uid://c785spb6drbgr" path="res://Assets/PostProcessingEffects/solidColor.gdshader" id="2_yodox"]
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="3_d6veq"]
 [ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="4_o2mkb"]
 [ext_resource type="PackedScene" uid="uid://d32ooqesmbk2u" path="res://Systems/Quest system/quest_giver.tscn" id="5_o2mkb"]
@@ -10,12 +12,20 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fxrq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fxrq"]
-transparency = 1
-albedo_color = Color(0, 1, 0.25, 0.239216)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxy7w"]
+render_priority = 4
+shader = ExtResource("2_n4fqd")
+shader_parameter/color = Color(0.092772, 0.783501, 0.278709, 1)
+shader_parameter/size = 1.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4fqd"]
+render_priority = 5
+next_pass = SubResource("ShaderMaterial_uxy7w")
+shader = ExtResource("2_yodox")
+shader_parameter/albedo_color = Color(0, 0.388235, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kejyp"]
-material = SubResource("StandardMaterial3D_7fxrq")
+material = SubResource("ShaderMaterial_n4fqd")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6veq"]
 albedo_color = Color(0, 0, 0, 1)
@@ -49,6 +59,7 @@ shape = SubResource("CapsuleShape3D_7fxrq")
 
 [node name="NPCVisuals" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+extra_cull_margin = 16384.0
 mesh = SubResource("CapsuleMesh_kejyp")
 skeleton = NodePath("../..")
 

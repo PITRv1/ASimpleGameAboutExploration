@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nwtjv17dqyx5"]
+[gd_scene load_steps=27 format=3 uid="uid://nwtjv17dqyx5"]
 
 [ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
@@ -19,18 +19,30 @@
 [ext_resource type="Resource" uid="uid://g3kescivuyi5" path="res://InputMappings/aim_down_sites.tres" id="15_pisgm"]
 [ext_resource type="PackedScene" uid="uid://d28w1uawnetlh" path="res://Systems/Quest system/quest_tracker.tscn" id="18_b1ygp"]
 [ext_resource type="Script" uid="uid://boj8atskudkmk" path="res://Player/inventory.gd" id="19_o28un"]
+[ext_resource type="Shader" uid="uid://5w15e7f3loyp" path="res://Assets/PostProcessingEffects/outlineShader.gdshader" id="20_n471f"]
+[ext_resource type="Texture2D" uid="uid://bev3rvvt0nqt6" path="res://icon.svg" id="21_7emwf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8h54"]
-transparency = 1
-albedo_color = Color(0, 0.581789, 0.822063, 0.239216)
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4ntmi"]
-material = SubResource("StandardMaterial3D_l8h54")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gu6f8"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7emwf"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hshwv"]
+render_priority = 1
+shader = ExtResource("20_n471f")
+shader_parameter/edge_threshold = 0.5
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/background_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0.599199, 0.599199, 0.599199, 1)
+shader_parameter/shadow_threshold = 0.535
+shader_parameter/light_direction = Vector3(0.5, 1, 0.5)
+shader_parameter/sky_color = Color(0, 0.395867, 0.386732, 1)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "quest_tracker", "inventory")]
 collision_layer = 2
@@ -121,6 +133,18 @@ one_shot = true
 
 [node name="Inventory" type="Node" parent="Utilities"]
 script = ExtResource("19_o28un")
+
+[node name="ShaderLayer" type="MeshInstance3D" parent="."]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_7emwf")
+surface_material_override/0 = SubResource("ShaderMaterial_hshwv")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.6715, 0)
+top_level = true
+size = Vector3(2, 29.172, 2)
+texture_albedo = ExtResource("21_7emwf")
+upper_fade = 1e-05
 
 [connection signal="timeout" from="Utilities/Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="Utilities/Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

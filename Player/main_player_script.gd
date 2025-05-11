@@ -15,7 +15,6 @@ extends CharacterBody3D
 @export var quest_tracker : QuestTracker
 @export var inventory : Inventory
 
-
 @export_category("Camera")
 @export var head_tilt_amount : float = 1.5
 @export var BASE_FOV := 80.0
@@ -220,7 +219,6 @@ func _handle_air_physics(delta: float) -> void:
 		var accel_speed = air_accel * air_move_speed * delta # Usually is adding this one.
 		accel_speed = min(accel_speed, add_speed_till_cap) # Works ok without this but sticking to the recipe
 		self.velocity += accel_speed * wish_dir
-
 
 func _handle_jump_physics() -> void:
 	if is_on_floor():

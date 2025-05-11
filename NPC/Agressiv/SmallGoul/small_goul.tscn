@@ -1,16 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://btg5ip7iujl7o"]
+[gd_scene load_steps=15 format=3 uid="uid://btg5ip7iujl7o"]
 
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="1_cq2wu"]
 [ext_resource type="Script" uid="uid://bybed8dxi62l0" path="res://NPC/Agressiv/SmallGoul/small_goul.gd" id="1_nrdv7"]
+[ext_resource type="Shader" uid="uid://d4k1uhpn8b101" path="res://Assets/PostProcessingEffects/simpleOutline.gdshader" id="2_11ea2"]
 [ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="2_54crd"]
 [ext_resource type="PackedScene" uid="uid://q7gwvvdltf1o" path="res://Systems/Components/hitbox_component.tscn" id="3_54crd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1ocg"]
-transparency = 1
-albedo_color = Color(1, 0, 0.0166664, 0.239216)
+[ext_resource type="Shader" uid="uid://c785spb6drbgr" path="res://Assets/PostProcessingEffects/solidColor.gdshader" id="3_nf5lc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a1ocg"]
-material = SubResource("StandardMaterial3D_a1ocg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nf5lc"]
+render_priority = 4
+shader = ExtResource("2_11ea2")
+shader_parameter/color = Color(1, 0.32549, 0.509804, 1)
+shader_parameter/size = 1.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11ea2"]
+render_priority = 5
+next_pass = SubResource("ShaderMaterial_nf5lc")
+shader = ExtResource("3_nf5lc")
+shader_parameter/albedo_color = Color(0.584314, 0.176471, 0.262745, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icjnx"]
 albedo_color = Color(0, 0, 0, 1)
@@ -40,6 +49,7 @@ use_3d_avoidance = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_a1ocg")
+surface_material_override/0 = SubResource("ShaderMaterial_11ea2")
 
 [node name="NPCVisuals2" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55474, -0.380156)

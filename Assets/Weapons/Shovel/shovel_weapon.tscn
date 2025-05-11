@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh5ly27gkyv5y"]
+[gd_scene load_steps=9 format=3 uid="uid://bh5ly27gkyv5y"]
 
 [ext_resource type="Script" uid="uid://bsjpyvutg8p06" path="res://Assets/Weapons/Shovel/shovel_weapon.gd" id="1_ygasu"]
 [ext_resource type="PackedScene" uid="uid://tdopvlvvjdia" path="res://Assets/Weapons/Shovel/shovel.glb" id="2_0j4be"]
@@ -31,7 +31,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.633333),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -54,10 +54,27 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-1.37532, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_60o5a"]
+resource_name = "charge_up"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jgjy2"]
 _data = {
 &"RESET": SubResource("Animation_jgjy2"),
-&"attack": SubResource("Animation_u0any")
+&"attack": SubResource("Animation_u0any"),
+&"charge_up": SubResource("Animation_60o5a")
 }
 
 [node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("hitbox_component", "animation_player")]
