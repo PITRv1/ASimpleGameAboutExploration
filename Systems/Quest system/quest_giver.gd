@@ -9,6 +9,10 @@ func giveQuest():
 		redeemQuest()
 		return
 	
+	if not quest_list:
+		print("No quests avalible!")
+		return
+		
 	current_quest = quest_list.pick_random()
 	
 	var player : Player = Global.player

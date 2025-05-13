@@ -1,17 +1,19 @@
-[gd_scene load_steps=27 format=3 uid="uid://cftumixv5k6ws"]
+[gd_scene load_steps=23 format=3 uid="uid://dx5hgnutxflij"]
 
-[ext_resource type="PackedScene" uid="uid://nwtjv17dqyx5" path="res://Player/player.tscn" id="1_edrkw"]
-[ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_k6vtt"]
-[ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="2_7mb3q"]
-[ext_resource type="PackedScene" uid="uid://da71cb620nk4w" path="res://Systems/Quest system/quest_target_object.tscn" id="2_gwak1"]
-[ext_resource type="Texture2D" uid="uid://bwve6vowurkhh" path="res://Assets/Textures/GrassTex 4.png" id="3_6pimv"]
-[ext_resource type="PackedScene" uid="uid://btg5ip7iujl7o" path="res://NPC/Agressiv/SmallGoul/small_goul.tscn" id="3_y43qb"]
+[ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_xnv1m"]
+[ext_resource type="Texture2D" uid="uid://bwve6vowurkhh" path="res://Assets/Textures/GrassTex 4.png" id="2_lrwxh"]
+[ext_resource type="PackedScene" uid="uid://beul40l4sjaop" path="res://Assets/Models/Rocks/smallRoundRock/small_round_rock.tscn" id="3_gyx35"]
+[ext_resource type="PackedScene" uid="uid://nwtjv17dqyx5" path="res://Player/player.tscn" id="3_tg0jd"]
+[ext_resource type="PackedScene" uid="uid://drbdyo1khnq8d" path="res://Assets/Models/Rocks/mildRoundRock/mild_round_rock.tscn" id="4_7y1fj"]
+[ext_resource type="PackedScene" uid="uid://da71cb620nk4w" path="res://Systems/Quest system/quest_target_object.tscn" id="4_20hh1"]
+[ext_resource type="PackedScene" uid="uid://byrkwdjxj5se7" path="res://Assets/Models/Rocks/mildPointyRock/mild_pointy_rock.tscn" id="5_fksp0"]
+[ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="5_lwkna"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
-shader = ExtResource("1_k6vtt")
-shader_parameter/color_top = Color(0.91, 0.14, 1, 1)
-shader_parameter/color_horizon = Color(1, 0.4, 0.42, 1)
-shader_parameter/color_bottom = Color(1, 0.74, 0.39, 1)
+shader = ExtResource("1_xnv1m")
+shader_parameter/color_top = Color(0.336728, 0.579955, 1, 1)
+shader_parameter/color_horizon = Color(1.34766e-06, 0.728952, 0.626002, 1)
+shader_parameter/color_bottom = Color(0.721799, 0.78788, 1, 1)
 shader_parameter/exponent_factor_top = 1.0
 shader_parameter/exponent_factor_bottom = 1.0
 shader_parameter/intensity_amp = 1.0
@@ -53,7 +55,7 @@ seamless = true
 color_ramp = SubResource("Gradient_7mb3q")
 noise = SubResource("FastNoiseLite_y43qb")
 
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_k6vtt"]
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_7y1fj"]
 _shader_parameters = {
 &"bias_distance": 512.0,
 &"blend_sharpness": 0.87,
@@ -77,7 +79,7 @@ _shader_parameters = {
 }
 show_checkered = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6vtt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fugqt"]
 transparency = 4
 cull_mode = 2
 vertex_color_use_as_albedo = true
@@ -90,7 +92,7 @@ distance_fade_max_distance = 96.0
 [sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_cqcaf"]
 generated_type = 1
 height_offset = 0.5
-material_override = SubResource("StandardMaterial3D_k6vtt")
+material_override = SubResource("StandardMaterial3D_fugqt")
 last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
@@ -184,9 +186,9 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_k6vtt")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("3_6pimv")
-shader_parameter/distance_fade_min = 125.21
-shader_parameter/distance_fade_max = 99.43
+shader_parameter/texture_albedo = ExtResource("2_lrwxh")
+shader_parameter/distance_fade_min = 217.43
+shader_parameter/distance_fade_max = 99.0
 shader_parameter/albedo_texture_size = Vector2i(200, 188)
 shader_parameter/point_size = 0.0
 shader_parameter/roughness = 1.0
@@ -204,38 +206,24 @@ shader_parameter/wind_frequency = 0.306
 shader_parameter/wind_direction = Vector2(1, 0.5)
 
 [sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_xlelr"]
+name = "Grass"
 id = 1
 generated_type = 1
 material_override = SubResource("ShaderMaterial_6pimv")
 last_lod = 0
 last_shadow_lod = 0
-lod0_range = 1843.8
+lod0_range = 172.65
 
-[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_xlelr"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_cqcaf"), SubResource("Terrain3DMeshAsset_xlelr")])
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_gyx35"]
+name = "small_round_rock"
+id = 2
+scene_file = ExtResource("3_gyx35")
+density = 0.42
+last_lod = 0
+last_shadow_lod = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tghiq"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_edrkw"]
-material = SubResource("StandardMaterial3D_tghiq")
-size = Vector3(5, 5, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mb3q"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_y43qb"]
-material = SubResource("StandardMaterial3D_7mb3q")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edrkw"]
-albedo_color = Color(0.0122824, 0.528711, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7mb3q"]
-material = SubResource("StandardMaterial3D_edrkw")
-size = Vector3(20, 2, 10)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y43qb"]
-data = PackedVector3Array(-10, 1, 5, 10, 1, 5, -10, -1, 5, 10, 1, 5, 10, -1, 5, -10, -1, 5, 10, 1, -5, -10, 1, -5, 10, -1, -5, -10, 1, -5, -10, -1, -5, 10, -1, -5, 10, 1, 5, 10, 1, -5, 10, -1, 5, 10, 1, -5, 10, -1, -5, 10, -1, 5, -10, 1, -5, -10, 1, 5, -10, -1, -5, -10, 1, 5, -10, -1, 5, -10, -1, -5, 10, 1, 5, -10, 1, 5, 10, 1, -5, -10, 1, 5, -10, 1, -5, 10, 1, -5, -10, -1, 5, 10, -1, 5, -10, -1, -5, 10, -1, 5, 10, -1, -5, -10, -1, -5)
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_fksp0"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_cqcaf"), SubResource("Terrain3DMeshAsset_xlelr"), SubResource("Terrain3DMeshAsset_gyx35")])
 
 [node name="TestWorld" type="Node3D"]
 
@@ -252,53 +240,61 @@ shadow_enabled = true
 
 [node name="Terrain3D" type="Terrain3D" parent="Environment/NavigationRegion3D" groups=["current_terrain"]]
 data_directory = "res://terrain_data"
-material = SubResource("Terrain3DMaterial_k6vtt")
-assets = SubResource("Terrain3DAssets_xlelr")
+material = SubResource("Terrain3DMaterial_7y1fj")
+assets = SubResource("Terrain3DAssets_fksp0")
 show_checkered = true
 top_level = true
 metadata/_edit_lock_ = true
 
-[node name="LargeCube" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88017, 2.47177, 7.45549)
-mesh = SubResource("BoxMesh_edrkw")
+[node name="Minerals" type="Node3D" parent="Environment"]
+
+[node name="MildRoundRock" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(1.85314, 0, 0, 0, 2.43523, 0, 0, 0, 3.03998, 29.5095, 3.14103, 10.769)
 skeleton = NodePath("../..")
 
-[node name="SmallCube" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88017, 0.47177, -3.74945)
-mesh = SubResource("BoxMesh_y43qb")
+[node name="MildRoundRock2" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(2.04291, 2.24778, 7.76425e-15, -0.297054, 0.466223, -4.30446, -1.68451, 2.64381, 0.759071, 25.6562, 2.50873, -35.6636)
 skeleton = NodePath("../..")
 
-[node name="SmallCube2" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(5.20786, 0, 0, 0, 5.20786, 0, 0, 0, 5.20786, 23.0699, 3.0211, -33.3115)
-mesh = SubResource("BoxMesh_y43qb")
+[node name="MildRoundRock3" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(1.41481, 2.71657, -1.84615, -1.05886, -2.02654, -2.47186, -2.34329, 2.55592, 0.0022973, -31.5922, 6.0151, -19.1018)
 skeleton = NodePath("../..")
 
-[node name="Groob" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1.00103, 0, 0, 0, 1.00103, 0, 0, 0, 1.00103, -16.8741, 0.662337, -0.398509)
-mesh = SubResource("BoxMesh_7mb3q")
+[node name="MildRoundRock4" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(-1.53065, 1.76136, -0.038261, -0.7058, -1.35083, -1.64767, -0.993084, -1.75474, 1.22999, -26.7069, 2.56113, 30.4261)
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Groob"]
+[node name="MildRoundRock5" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(-3.2029, 0.00909209, 1.51214, -1.26672, -2.42438, -2.95712, 0.681707, -4.46216, 1.60974, -97.5576, -0.1241, 33.8327)
+skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Groob/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_y43qb")
+[node name="MildRoundRock6" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(0.00199873, 4.00227, 3.71317, 1.76752, 3.82343, -3.42234, -4.79753, 1.4103, -1.25932, -88.6707, 4.09029, -20.2641)
+skeleton = NodePath("../..")
 
-[node name="Player" parent="." instance=ExtResource("1_edrkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38114, 8.25343, 0.173274)
+[node name="MildPointyRock" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.73, 1.61035, -14.1593)
 
-[node name="QuestTargetObject" parent="." instance=ExtResource("2_gwak1")]
+[node name="MildPointyRock2" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
+transform = Transform3D(0.754688, 0.342333, -0.559691, -0.474024, 0.874299, -0.104414, 0.453593, 0.344107, 0.822097, -82.139, 1.98844, 23.8685)
+
+[node name="MildPointyRock3" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
+transform = Transform3D(0.177095, -0.0368659, -0.988364, -0.482524, 1.38654, -0.104826, 0.87863, 0.768887, 0.141644, -54.6875, 8.95855, -9.32935)
+
+[node name="MildPointyRock4" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
+transform = Transform3D(-1.58272, -0.0457682, 0.472776, -0.0169394, 1.96697, 0.062629, -0.537269, 0.0728117, -1.39471, 9.83459, 4.05483, 27.278)
+
+[node name="MildPointyRock5" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
+transform = Transform3D(1.19143, -0.0875587, 2.61602, 1.83761, 2.97836, -0.594933, -2.33009, 2.30409, 0.868444, -51.77, 21.7344, 35.9352)
+
+[node name="Player" parent="." instance=ExtResource("3_tg0jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38114, 0.255821, -5.74244)
+
+[node name="QuestTargetObject" parent="." instance=ExtResource("4_20hh1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28985, 2.76544, 0)
 targetObjectID = 1
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="QuestNPC" parent="NPCs" instance=ExtResource("2_7mb3q")]
-transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -2.79931, 3.48141, 0.299154)
-
-[node name="SmallGoul" parent="NPCs" node_paths=PackedStringArray("target") instance=ExtResource("3_y43qb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.91, 0.220538, 12.4135)
-target = NodePath("../../Player")
-
-[node name="SmallGoul2" parent="NPCs" node_paths=PackedStringArray("target") instance=ExtResource("3_y43qb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.87922, 3.08285, 6.11156)
-target = NodePath("../../Player")
+[node name="QuestNPC" parent="NPCs" instance=ExtResource("5_lwkna")]
+transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -2.79931, 11.1666, 0.299154)

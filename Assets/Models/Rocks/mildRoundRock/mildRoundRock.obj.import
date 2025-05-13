@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://clwtiem77gvdr"
+path="res://.godot/imported/mildRoundRock.obj-1785c02ec286cd7e625110b2523f5b3f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mildRoundRock.obj-1785c02ec286cd7e625110b2523f5b3f.mesh"]
+
+source_file="res://Assets/Models/Rocks/mildRoundRock/mildRoundRock.obj"
+dest_files=["res://.godot/imported/mildRoundRock.obj-1785c02ec286cd7e625110b2523f5b3f.mesh", "res://.godot/imported/mildRoundRock.obj-1785c02ec286cd7e625110b2523f5b3f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

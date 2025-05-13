@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://beul40l4sjaop"]
+
+[ext_resource type="ArrayMesh" uid="uid://cycitu1cj1753" path="res://Assets/Models/Rocks/smallRoundRock/smallRoundRock.obj" id="1_nr15a"]
+
+[node name="SmallRoundRock" type="MeshInstance3D"]
+transform = Transform3D(0.308036, 0, 0, 0, -0.10489, -0.289628, 0, 0.289628, -0.10489, 0, 0, 0)
+mesh = ExtResource("1_nr15a")

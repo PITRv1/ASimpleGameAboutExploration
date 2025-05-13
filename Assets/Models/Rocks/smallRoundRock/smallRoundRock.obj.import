@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cycitu1cj1753"
+path="res://.godot/imported/smallRoundRock.obj-0f0a7711a531a6823d463d4c059a4164.mesh"
+
+[deps]
+
+files=["res://.godot/imported/smallRoundRock.obj-0f0a7711a531a6823d463d4c059a4164.mesh"]
+
+source_file="res://Assets/Models/Rocks/smallRoundRock/smallRoundRock.obj"
+dest_files=["res://.godot/imported/smallRoundRock.obj-0f0a7711a531a6823d463d4c059a4164.mesh", "res://.godot/imported/smallRoundRock.obj-0f0a7711a531a6823d463d4c059a4164.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

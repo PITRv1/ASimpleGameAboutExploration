@@ -89,6 +89,8 @@ void fragment() {
         vec3 shaded_color = mix(background_color, shadow_color, shadow);
         final_color = edge > edge_threshold ? line_color : shaded_color;
     }
-    
+	
+    float luminance = dot(final_color, vec3(0.2126, 0.7152, 0.0722));
+	
     ALBEDO = final_color;
 }

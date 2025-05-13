@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0t6vdas64nli"]
+[gd_scene load_steps=21 format=3 uid="uid://b0t6vdas64nli"]
 
 [ext_resource type="Script" uid="uid://c83omarf6f48w" path="res://NPC/Friendly/QuestNPC/quest_npc.gd" id="1_icjnx"]
 [ext_resource type="PackedScene" uid="uid://d1nkr62gaodmv" path="res://Systems/InteractionSystem/interaction_receiver.tscn" id="2_kejyp"]
@@ -12,11 +12,18 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fxrq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxeuh"]
+render_priority = 3
+shader = ExtResource("2_n4fqd")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/size = 1.2
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxy7w"]
 render_priority = 4
+next_pass = SubResource("ShaderMaterial_qxeuh")
 shader = ExtResource("2_n4fqd")
 shader_parameter/color = Color(0.092772, 0.783501, 0.278709, 1)
-shader_parameter/size = 1.12
+shader_parameter/size = 1.11
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n4fqd"]
 render_priority = 5

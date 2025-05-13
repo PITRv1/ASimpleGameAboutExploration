@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://btg5ip7iujl7o"]
+[gd_scene load_steps=16 format=3 uid="uid://btg5ip7iujl7o"]
 
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="1_cq2wu"]
 [ext_resource type="Script" uid="uid://bybed8dxi62l0" path="res://NPC/Agressiv/SmallGoul/small_goul.gd" id="1_nrdv7"]
@@ -9,8 +9,15 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a1ocg"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mj8et"]
+render_priority = 3
+shader = ExtResource("2_11ea2")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/size = 1.2
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf5lc"]
 render_priority = 4
+next_pass = SubResource("ShaderMaterial_mj8et")
 shader = ExtResource("2_11ea2")
 shader_parameter/color = Color(1, 0.32549, 0.509804, 1)
 shader_parameter/size = 1.12

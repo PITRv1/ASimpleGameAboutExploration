@@ -6,7 +6,6 @@ var completedQuestList : Array
 
 func trackNewQuest(quest : Quest):
 	activeQuest = quest
-	print(quest.questName)
 	
 func completeQuest(questTargetObjectID : int) -> bool:
 	if activeQuest:
