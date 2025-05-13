@@ -11,8 +11,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
 shader = ExtResource("1_xnv1m")
-shader_parameter/color_top = Color(0.336728, 0.579955, 1, 1)
-shader_parameter/color_horizon = Color(1.34766e-06, 0.728952, 0.626002, 1)
+shader_parameter/color_top = Color(1.78084e-06, 0.200753, 0.528567, 1)
+shader_parameter/color_horizon = Color(0.663723, 0.369621, 0.335591, 1)
 shader_parameter/color_bottom = Color(0.721799, 0.78788, 1, 1)
 shader_parameter/exponent_factor_top = 1.0
 shader_parameter/exponent_factor_bottom = 1.0
@@ -209,6 +209,7 @@ shader_parameter/wind_direction = Vector2(1, 0.5)
 name = "Grass"
 id = 1
 generated_type = 1
+height_offset = 0.5
 material_override = SubResource("ShaderMaterial_6pimv")
 last_lod = 0
 last_shadow_lod = 0
@@ -221,6 +222,7 @@ scene_file = ExtResource("3_gyx35")
 density = 0.42
 last_lod = 0
 last_shadow_lod = 0
+lod0_range = 128.0
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_fksp0"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_cqcaf"), SubResource("Terrain3DMeshAsset_xlelr"), SubResource("Terrain3DMeshAsset_gyx35")])

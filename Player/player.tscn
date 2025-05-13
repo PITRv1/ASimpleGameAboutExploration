@@ -145,13 +145,11 @@ one_shot = true
 script = ExtResource("19_o28un")
 
 [node name="UnshadedShaderLayer" type="MeshInstance3D" parent="."]
-visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_7emwf")
 surface_material_override/0 = SubResource("ShaderMaterial_hshwv")
 
 [node name="LightShaderLayer" type="MeshInstance3D" parent="."]
-visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_hshwv")
 surface_material_override/0 = SubResource("ShaderMaterial_gpjlu")
