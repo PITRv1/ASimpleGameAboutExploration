@@ -29,7 +29,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_2c8bc")
 
-[node name="MoneyContainer" type="Control" parent="PlayerHud"]
+[node name="MoneyContainer" type="Control" parent="PlayerHud" node_paths=PackedStringArray("money_container")]
 layout_mode = 1
 anchors_preset = 0
 offset_left = 30.0
@@ -37,6 +37,7 @@ offset_right = 430.0
 offset_bottom = 63.0
 mouse_filter = 2
 script = ExtResource("3_p3fqj")
+money_container = NodePath("RichTextLabel")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerHud/MoneyContainer"]
 layout_mode = 1
@@ -46,7 +47,7 @@ offset_right = 309.0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "[rainbow freq=.2][outline_size={0}]99999999999[/outline_size][/rainbow]"
+text = "[rainbow freq=.2][outline_size={0}]0[/outline_size][/rainbow]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
@@ -65,6 +66,15 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_2c8bc")
 expand_mode = 4
+
+[node name="DialogueLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="PauseMenu" type="Control" parent="."]
 layout_mode = 1

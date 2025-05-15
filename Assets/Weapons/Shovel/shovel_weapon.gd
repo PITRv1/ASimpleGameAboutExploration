@@ -49,6 +49,8 @@ func knockback_player():
 	var result : Dictionary = space_state.intersect_ray(query)
 	
 	var normal : Vector3 
+	
+	@warning_ignore("narrowing_conversion")
 	var knockback_charge_mult : int = chargupTimer
 	
 	if result:

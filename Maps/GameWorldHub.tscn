@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dx5hgnutxflij"]
+[gd_scene load_steps=27 format=3 uid="uid://dx5hgnutxflij"]
 
 [ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_xnv1m"]
 [ext_resource type="Shader" uid="uid://bac1p4a2qg8wi" path="res://Assets/PostProcessingEffects/grassShader.gdshader" id="2_fksp0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://byrkwdjxj5se7" path="res://Assets/Models/Rocks/mildPointyRock/mild_pointy_rock.tscn" id="5_fksp0"]
 [ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="5_lwkna"]
 [ext_resource type="PackedScene" uid="uid://1ab7xbir40h2" path="res://Assets/Models/Buildings/arched_stone_complete.tscn" id="10_fugqt"]
+[ext_resource type="ArrayMesh" uid="uid://djjrdxne51ja6" path="res://Assets/Models/Nature/tree_small.obj" id="11_4ef4c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
 shader = ExtResource("1_xnv1m")
@@ -34,6 +35,8 @@ fog_density = 0.138
 volumetric_fog_density = 0.0
 adjustment_enabled = true
 adjustment_saturation = 1.59
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_fugqt"]
 
 [sub_resource type="Gradient" id="Gradient_7mb3q"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -143,6 +146,8 @@ lod0_range = 128.0
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_fksp0"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_cqcaf"), SubResource("Terrain3DMeshAsset_xlelr"), SubResource("Terrain3DMeshAsset_gyx35")])
 
+[sub_resource type="Curve3D" id="Curve3D_gl7b7"]
+
 [node name="TestWorld" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -155,6 +160,7 @@ shadow_enabled = true
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environment"]
+navigation_mesh = SubResource("NavigationMesh_fugqt")
 
 [node name="Terrain3D" type="Terrain3D" parent="Environment/NavigationRegion3D" groups=["current_terrain"]]
 data_directory = "res://terrain_data"
@@ -224,3 +230,10 @@ transform = Transform3D(1.50576, 0, 0, 0, 1.50576, 0, 0, 0, 1.50576, -61.1143, 0
 
 [node name="ArchedStoneComplete2" parent="." instance=ExtResource("10_fugqt")]
 transform = Transform3D(1.50576, 0, 0, 0, 1.50576, 0, 0, 0, 1.50576, -61.1143, 0.0853877, 9.37123)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_gl7b7")
+
+[node name="TreeSmall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.384, 120.773, -165.687)
+mesh = ExtResource("11_4ef4c")
