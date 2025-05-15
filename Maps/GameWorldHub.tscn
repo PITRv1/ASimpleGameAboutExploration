@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://dx5hgnutxflij"]
+[gd_scene load_steps=24 format=3 uid="uid://dx5hgnutxflij"]
 
 [ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_xnv1m"]
+[ext_resource type="Shader" uid="uid://bac1p4a2qg8wi" path="res://Assets/PostProcessingEffects/grassShader.gdshader" id="2_fksp0"]
 [ext_resource type="Texture2D" uid="uid://bwve6vowurkhh" path="res://Assets/Textures/GrassTex 4.png" id="2_lrwxh"]
 [ext_resource type="PackedScene" uid="uid://beul40l4sjaop" path="res://Assets/Models/Rocks/smallRoundRock/small_round_rock.tscn" id="3_gyx35"]
 [ext_resource type="PackedScene" uid="uid://nwtjv17dqyx5" path="res://Player/player.tscn" id="3_tg0jd"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://da71cb620nk4w" path="res://Systems/Quest system/quest_target_object.tscn" id="4_20hh1"]
 [ext_resource type="PackedScene" uid="uid://byrkwdjxj5se7" path="res://Assets/Models/Rocks/mildPointyRock/mild_pointy_rock.tscn" id="5_fksp0"]
 [ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="5_lwkna"]
+[ext_resource type="PackedScene" uid="uid://1ab7xbir40h2" path="res://Assets/Models/Buildings/arched_stone_complete.tscn" id="10_fugqt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
 shader = ExtResource("1_xnv1m")
@@ -24,15 +26,14 @@ sky_material = SubResource("ShaderMaterial_cqcaf")
 [sub_resource type="Environment" id="Environment_7mb3q"]
 background_mode = 2
 sky = SubResource("Sky_edrkw")
+ambient_light_source = 1
+reflected_light_source = 1
 tonemap_mode = 2
-ssao_enabled = true
-glow_enabled = true
 fog_light_energy = 0.0
 fog_density = 0.138
 volumetric_fog_density = 0.0
-adjustment_brightness = 1.23
-adjustment_contrast = 1.19
-adjustment_saturation = 1.34
+adjustment_enabled = true
+adjustment_saturation = 1.59
 
 [sub_resource type="Gradient" id="Gradient_7mb3q"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -97,95 +98,10 @@ last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
 
-[sub_resource type="Shader" id="Shader_k6vtt"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
-
-shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx, depth_prepass_alpha;
-
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-
-uniform float distance_fade_min : hint_range(0.0, 4096.0, 0.01);
-uniform float distance_fade_max : hint_range(0.0, 4096.0, 0.01);
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-
-uniform vec4 backlight : source_color;
-uniform sampler2D texture_backlight : hint_default_black, filter_linear_mipmap, repeat_enable;
-
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-// Wind controls
-uniform float wind_speed : hint_range(0.0, 5.0) = 1.0;
-uniform float wind_strength : hint_range(0.0, 2.0) = 0.5;
-uniform float wind_frequency : hint_range(0.0, 5.0) = 2.0;
-uniform vec2 wind_direction = vec2(1.0, 0.5); // XZ plane direction
-
-void vertex() {
-	UV = UV * uv1_scale.xy + uv1_offset.xy;
-
-    // Calculate wind effect
-    float wind_wave = sin(TIME * wind_speed + VERTEX.x * wind_frequency) * wind_strength;
-    float sway = cos(TIME * wind_speed * 0.8 + VERTEX.z * wind_frequency * 1.2) * wind_strength * 0.5;
-
-    // Combine wind effects
-    vec3 wind_offset = vec3(
-        wind_direction.x * (wind_wave + sway) * 0.3,
-        (wind_wave - sway) * 0.5,
-        wind_direction.y * (wind_wave - sway) * 0.3
-    );
-
-    // Apply to vertex position
-    VERTEX += wind_offset;
-
-    // Standard position transformation
-    POSITION = (PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX) * vec4(VERTEX, 1.0);
-}
-
-void fragment() {
-	vec2 base_uv = UV;
-
-	vec4 albedo_tex = texture(texture_albedo, base_uv);
-
-	// Vertex Color Use as Albedo: Enabled
-	albedo_tex *= COLOR;
-
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-	ALPHA *= albedo.a * albedo_tex.a;
-
-	// Distance Fade: Pixel Alpha
-	ALPHA *= clamp(smoothstep(distance_fade_min, distance_fade_max, length(VERTEX)), 0.0, 1.0);
-
-	// Backlight: Enabled
-	vec3 backlight_tex = texture(texture_backlight, base_uv).rgb;
-	BACKLIGHT = (backlight.rgb + backlight_tex);
-}
-"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pimv"]
 render_priority = 0
-shader = SubResource("Shader_k6vtt")
-shader_parameter/albedo = Color(1, 1, 1, 1)
+shader = ExtResource("2_fksp0")
+shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/texture_albedo = ExtResource("2_lrwxh")
 shader_parameter/distance_fade_min = 217.43
 shader_parameter/distance_fade_max = 99.0
@@ -195,7 +111,7 @@ shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
-shader_parameter/backlight = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/backlight = Color(0, 0, 0, 1)
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
@@ -289,6 +205,8 @@ transform = Transform3D(-1.58272, -0.0457682, 0.472776, -0.0169394, 1.96697, 0.0
 [node name="MildPointyRock5" parent="Environment/Minerals" instance=ExtResource("5_fksp0")]
 transform = Transform3D(1.19143, -0.0875587, 2.61602, 1.83761, 2.97836, -0.594933, -2.33009, 2.30409, 0.868444, -51.77, 21.7344, 35.9352)
 
+[node name="Buildings" type="Node3D" parent="Environment"]
+
 [node name="Player" parent="." instance=ExtResource("3_tg0jd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38114, 0.255821, -5.74244)
 
@@ -300,3 +218,9 @@ targetObjectID = 1
 
 [node name="QuestNPC" parent="NPCs" instance=ExtResource("5_lwkna")]
 transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -2.79931, 11.1666, 0.299154)
+
+[node name="ArchedStoneComplete" parent="." instance=ExtResource("10_fugqt")]
+transform = Transform3D(1.50576, 0, 0, 0, 1.50576, 0, 0, 0, 1.50576, -61.1143, 0.0853877, 9.37123)
+
+[node name="ArchedStoneComplete2" parent="." instance=ExtResource("10_fugqt")]
+transform = Transform3D(1.50576, 0, 0, 0, 1.50576, 0, 0, 0, 1.50576, -61.1143, 0.0853877, 9.37123)

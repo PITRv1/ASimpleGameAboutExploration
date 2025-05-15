@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsef5yewsks8e"]
+[gd_scene load_steps=6 format=3 uid="uid://dsef5yewsks8e"]
 
 [ext_resource type="Script" uid="uid://dkhpv80vnq3sl" path="res://Player/UI/player_ui_controller.gd" id="1_qcm1t"]
 [ext_resource type="Script" uid="uid://b15g5254dc8yc" path="res://Player/UI/pause_menu.gd" id="2_agak2"]
 [ext_resource type="Script" uid="uid://cu3xm8gc7cbq0" path="res://Player/UI/player_hud.gd" id="3_2c8bc"]
+[ext_resource type="Script" uid="uid://ccrkdown0y0ju" path="res://Player/UI/money_display.gd" id="3_p3fqj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2c8bc"]
 
 [node name="PlayerUI" type="Control" node_paths=PackedStringArray("pause_menu")]
 process_mode = 3
@@ -17,10 +20,51 @@ script = ExtResource("1_qcm1t")
 pause_menu = NodePath("PauseMenu")
 
 [node name="PlayerHud" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("3_2c8bc")
+
+[node name="MoneyContainer" type="Control" parent="PlayerHud"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_right = 430.0
+offset_bottom = 63.0
+mouse_filter = 2
+script = ExtResource("3_p3fqj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerHud/MoneyContainer"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 309.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "[rainbow freq=.2][outline_size={0}]99999999999[/outline_size][/rainbow]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHud/MoneyContainer"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -66.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_2c8bc")
+expand_mode = 4
 
 [node name="PauseMenu" type="Control" parent="."]
 layout_mode = 1
@@ -40,7 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.278431)
 
-[node name="Control" type="Control" parent="PauseMenu"]
+[node name="MiddleContainer" type="Control" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,7 +98,7 @@ offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ResumeButton" type="Button" parent="PauseMenu/Control"]
+[node name="ResumeButton" type="Button" parent="PauseMenu/MiddleContainer"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -67,4 +111,4 @@ theme_override_font_sizes/font_size = 96
 text = "Resume"
 
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="VisibiliyChanged"]
-[connection signal="pressed" from="PauseMenu/Control/ResumeButton" to="." method="inputHandelerOnEscapePressed"]
+[connection signal="pressed" from="PauseMenu/MiddleContainer/ResumeButton" to="." method="inputHandelerOnEscapePressed"]
