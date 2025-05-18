@@ -43,7 +43,7 @@ void vertex() {
     // Combine wind effects
     vec3 wind_offset = vec3(
         wind_direction.x * (wind_wave + sway) * 0.3,
-        (wind_wave - sway) * 0.5,
+        (wind_wave - sway) * 0.1,
         wind_direction.y * (wind_wave - sway) * 0.3
     );
 
@@ -52,6 +52,7 @@ void vertex() {
 
     // Standard position transformation
     POSITION = (PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX) * vec4(VERTEX, 1.0);
+	
 }
 
 void fragment() {
