@@ -13,20 +13,20 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fxrq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qxeuh"]
-render_priority = 3
+render_priority = 40
 shader = ExtResource("2_n4fqd")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/size = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxy7w"]
-render_priority = 4
+render_priority = 41
 next_pass = SubResource("ShaderMaterial_qxeuh")
 shader = ExtResource("2_n4fqd")
 shader_parameter/color = Color(0.092772, 0.783501, 0.278709, 1)
 shader_parameter/size = 1.11
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n4fqd"]
-render_priority = 5
+render_priority = 42
 next_pass = SubResource("ShaderMaterial_uxy7w")
 shader = ExtResource("2_yodox")
 shader_parameter/albedo_color = Color(0, 0.388235, 0, 1)

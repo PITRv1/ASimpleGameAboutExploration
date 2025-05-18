@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://ca2cjfja5pefi"]
+
+[ext_resource type="Shader" uid="uid://bg3awrusyfgra" path="res://Assets/PostProcessingEffects/windSway.gdshader" id="1_jun2k"]
+[ext_resource type="Shader" uid="uid://can6xdl3pkwju" path="res://Assets/PostProcessingEffects/perObjectDepthOutline.gdshader" id="2_b4fn7"]
+[ext_resource type="ArrayMesh" uid="uid://dlfkic6qthxba" path="res://Assets/Models/Nature/treeSmall/smallTreeLeaves.obj" id="2_jun2k"]
+[ext_resource type="ArrayMesh" uid="uid://c1jl1aspnq7rv" path="res://Assets/Models/Nature/treeSmall/smallTreeTrunk.obj" id="3_jwup2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oa2ib"]
+size = Vector3(1.57196, 3.79381, 1.68121)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b4fn7"]
+size = Vector3(6.17432, 5.92184, 6.59668)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jun2k"]
+render_priority = 0
+shader = ExtResource("1_jun2k")
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/wind_speed = 1.0
+shader_parameter/wind_strength = 0.5
+shader_parameter/wind_frequency = 2.0
+shader_parameter/wind_direction = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oj0md"]
+render_priority = 20
+shader = ExtResource("2_b4fn7")
+shader_parameter/solid_color = Color(0.284517, 0.145694, 4.81308e-08, 1)
+shader_parameter/outline_threshold = 0.2
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[node name="Tree" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0673523, 1.911, -0.104156)
+shape = SubResource("BoxShape3D_oa2ib")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199951, 6.55751, 0)
+shape = SubResource("BoxShape3D_b4fn7")
+
+[node name="SmallTreeLeaves" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_jun2k")
+mesh = ExtResource("2_jun2k")
+
+[node name="SmallTreeTrunk" type="MeshInstance3D" parent="."]
+material_overlay = SubResource("ShaderMaterial_oj0md")
+mesh = ExtResource("3_jwup2")

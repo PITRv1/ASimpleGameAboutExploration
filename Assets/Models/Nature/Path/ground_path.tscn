@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://yy5q1vb3buis"]
+
+[ext_resource type="Shader" uid="uid://can6xdl3pkwju" path="res://Assets/PostProcessingEffects/perObjectDepthOutline.gdshader" id="1_fety8"]
+
+[sub_resource type="Curve3D" id="Curve3D_xbill"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhw5g"]
+render_priority = 21
+shader = ExtResource("1_fety8")
+shader_parameter/solid_color = Color(1, 0.856806, 0.640244, 1)
+shader_parameter/outline_threshold = 0.2
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bngf"]
+render_priority = 20
+next_pass = SubResource("ShaderMaterial_vhw5g")
+
+[node name="GroundPath" type="Path3D"]
+curve = SubResource("Curve3D_xbill")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+use_collision = true
+polygon = PackedVector2Array(-3.05622, 0, -2.99435, 0.0618668, 3.94091, 0.0494935, 3.9904, 0.00618659)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_0bngf")

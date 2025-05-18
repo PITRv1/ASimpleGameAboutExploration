@@ -39,7 +39,7 @@ shader = ExtResource("20_n471f")
 shader_parameter/edge_threshold = 0.5
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/background_color = Color(1, 1, 1, 1)
-shader_parameter/shadow_color = Color(0.599199, 0.599199, 0.599199, 1)
+shader_parameter/shadow_color = Color(0.635799, 0.6358, 0.635799, 1)
 shader_parameter/shadow_threshold = 0.535
 shader_parameter/light_direction = Vector3(0.5, 1, 0.5)
 shader_parameter/sky_color = Color(0, 0.395867, 0.386732, 1)
@@ -145,7 +145,6 @@ one_shot = true
 script = ExtResource("19_o28un")
 
 [node name="UnshadedShaderLayer" type="MeshInstance3D" parent="."]
-visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_7emwf")
 surface_material_override/0 = SubResource("ShaderMaterial_hshwv")
