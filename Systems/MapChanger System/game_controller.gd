@@ -4,8 +4,8 @@ class_name GameController
 @export var world_3d : Node3D
 @export var gui : Control
 
-var current_3d_scene
-var current_gui_scene
+var current_3d_scene : Node3D
+var current_gui_scene : Control
 
 func _init() -> void:
 	Global.game_controller = self

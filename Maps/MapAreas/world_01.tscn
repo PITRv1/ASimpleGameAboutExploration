@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://nwtjv17dqyx5" path="res://Player/player.tscn" id="1_iensc"]
 [ext_resource type="PackedScene" uid="uid://bk0katloxa5nl" path="res://Systems/MapChanger System/portal.tscn" id="2_aovhn"]
 [ext_resource type="Shader" uid="uid://beib55g20ff5m" path="res://Assets/PostProcessingEffects/portal.gdshader" id="3_sknnr"]
-[ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="4_sknnr"]
+[ext_resource type="PackedScene" uid="uid://da71cb620nk4w" path="res://Systems/Quest system/quest_target_object.tscn" id="5_y4uam"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iensc"]
 sky_top_color = Color(0.235118, 0.462651, 0.801876, 1)
@@ -96,14 +96,6 @@ shadow_enabled = true
 directional_shadow_max_distance = 4096.0
 
 [node name="Player" parent="." instance=ExtResource("1_iensc")]
-head_tilt_amount = 1.5
-BASE_FOV = 80.0
-FOV_CHANGE = 1.0
-gravity = 16.0
-jumpForce = 5.0
-ground_accel = 14.0
-ground_decel = 10.0
-ground_friction = 6.0
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_iensc")
@@ -119,5 +111,6 @@ material_override = SubResource("ShaderMaterial_54n0e")
 mesh = SubResource("ArrayMesh_l35je")
 scene_to_load = "res://Maps/GameWorldHub.tscn"
 
-[node name="QuestNPC" parent="." instance=ExtResource("4_sknnr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32277, -4.76837e-07, 7.44528)
+[node name="QuestTargetObject" parent="." instance=ExtResource("5_y4uam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10056, 1.61354, -3.60474)
+targetObjectID = 1

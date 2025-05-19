@@ -67,6 +67,7 @@ weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
 quest_tracker = NodePath("Utilities/QuestTracker")
 inventory = NodePath("Utilities/Inventory")
 look_sensitivity = 0.005
+ground_friction = 0.0
 air_cap = 1.0
 air_accel = 3000.0
 air_move_speed = 1000.0

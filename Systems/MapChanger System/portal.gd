@@ -2,7 +2,6 @@ extends Node3D
 
 @export var scene_to_load : String
 
-var current_scene
 var player_is_nerby : bool = false
 var playerRef : Player
 var max_distance : float
@@ -10,13 +9,12 @@ var max_distance : float
 @onready var playerTriggerCollision : CollisionShape3D = $PortalNerbyTrigger/CollisionShape3D
 
 func _ready() -> void:
-	current_scene = get_tree()
 	if playerTriggerCollision.shape is CylinderShape3D:
 		max_distance = playerTriggerCollision.shape.radius
 
 func load_scene(body):
 	if body is Player:
-		Global.game_controller.change_3d_scene(scene_to_load)
+		Global.game_controller.call_deferred("change_3d_scene", scene_to_load)
 
 func _on_portal_nerby_trigger_body_entered(body: Node3D) -> void:
 	if body is Player:

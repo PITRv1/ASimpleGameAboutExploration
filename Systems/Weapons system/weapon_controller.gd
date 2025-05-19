@@ -22,8 +22,8 @@ func _ready() -> void:
 	input_handeler.onAdsHeld.connect(ads)
 	
 	
-	#avalible_weapons["Shovel"] = all_weapons["Shovel"]
-	#equip_weapon(avalible_weapons["Shovel"])
+	avalible_weapons["Shovel"] = all_weapons["Shovel"]
+	equip_weapon(avalible_weapons["Shovel"])
 	
 
 func equip_weapon(weapon_scene : PackedScene):

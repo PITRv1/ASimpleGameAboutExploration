@@ -210,6 +210,7 @@ shader_parameter/wind_direction = Vector2(1, 0.5)
 [sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_xlelr"]
 id = 1
 generated_type = 1
+height_offset = 0.5
 material_override = SubResource("ShaderMaterial_6pimv")
 last_lod = 0
 last_shadow_lod = 0

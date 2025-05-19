@@ -27,5 +27,6 @@ func redeemQuest():
 			player.inventory.add_money(quest.rewardMoneyAmount)
 			
 			print("Quest Giver :", quest.rewardMoneyAmount)
+			player.quest_tracker.removeFromCompleted(quest)
 			
 			current_quest = null

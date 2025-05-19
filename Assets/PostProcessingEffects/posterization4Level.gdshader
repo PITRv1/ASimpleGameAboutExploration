@@ -20,12 +20,12 @@ void fragment(){
 	vec4 c_texture = texture(SCREEN_TEXTURE, SCREEN_UV).rgba;
 	ALBEDO = c_texture.rgb;
 	ALPHA = c_texture.a;
-	
+
 	float rgb_avg = (ALBEDO.r + ALBEDO.g + ALBEDO.b)/3.0;
 	if(rgb_avg < threshold1){
 		ALBEDO = level1.rgb;
 		ALPHA = level1.a;
-		
+
 	}else if(rgb_avg < threshold2){
 		ALBEDO = level2.rgb;
 		ALPHA = level2.a;
