@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1pf0y65s2hog"]
+
+[ext_resource type="Script" uid="uid://bn2ywerooj3bc" path="res://Systems/MapChanger System/game_controller.gd" id="1_6uyvy"]
+[ext_resource type="PackedScene" uid="uid://dx5hgnutxflij" path="res://Maps/GameWorldHub.tscn" id="2_bxjre"]
+
+[node name="GameController" type="Node" node_paths=PackedStringArray("world_3d", "gui")]
+script = ExtResource("1_6uyvy")
+world_3d = NodePath("World3D")
+gui = NodePath("GUI")
+
+[node name="World3D" type="Node3D" parent="."]
+
+[node name="HubWorld" parent="World3D" instance=ExtResource("2_bxjre")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1

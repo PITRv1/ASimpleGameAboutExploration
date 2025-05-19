@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dx5hgnutxflij"]
+[gd_scene load_steps=42 format=3 uid="uid://dx5hgnutxflij"]
 
 [ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_xnv1m"]
 [ext_resource type="Shader" uid="uid://bac1p4a2qg8wi" path="res://Assets/PostProcessingEffects/grassShader.gdshader" id="2_fksp0"]
@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://byrkwdjxj5se7" path="res://Assets/Models/Rocks/mildPointyRock/mild_pointy_rock.tscn" id="5_fksp0"]
 [ext_resource type="PackedScene" uid="uid://b0t6vdas64nli" path="res://NPC/Friendly/QuestNPC/quest_npc.tscn" id="5_lwkna"]
 [ext_resource type="PackedScene" uid="uid://bk0katloxa5nl" path="res://Systems/MapChanger System/portal.tscn" id="6_ddeqm"]
-[ext_resource type="PackedScene" uid="uid://bopnyh7nj2pdo" path="res://Maps/MapAreas/world_01.tscn" id="7_qer7r"]
 [ext_resource type="PackedScene" uid="uid://ca2cjfja5pefi" path="res://Assets/Models/Nature/treeSmall/tree.tscn" id="9_4ef4c"]
 [ext_resource type="PackedScene" uid="uid://1ab7xbir40h2" path="res://Assets/Models/Buildings/arched_stone_complete.tscn" id="10_fugqt"]
 [ext_resource type="PackedScene" uid="uid://yy5q1vb3buis" path="res://Assets/Models/Nature/Path/ground_path.tscn" id="10_gl7b7"]
+[ext_resource type="Shader" uid="uid://beib55g20ff5m" path="res://Assets/PostProcessingEffects/portal.gdshader" id="10_qer7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
 shader = ExtResource("1_xnv1m")
@@ -149,6 +149,58 @@ lod0_range = 128.0
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_fksp0"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_cqcaf"), SubResource("Terrain3DMeshAsset_xlelr"), SubResource("Terrain3DMeshAsset_gyx35")])
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qag23"]
+frequency = 0.0011
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fh0ct"]
+seamless = true
+noise = SubResource("FastNoiseLite_qag23")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_emi4o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ohs0c"]
+noise = SubResource("FastNoiseLite_emi4o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80opg"]
+render_priority = 21
+shader = ExtResource("10_qer7r")
+shader_parameter/background_color = Color(0, 0, 0, 0.517647)
+shader_parameter/primary_color = Color(5.58317e-06, 0.752069, 0.76111, 1)
+shader_parameter/secondary_color = Color(0, 0.765639, 0.652952, 0.517647)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_fh0ct")
+shader_parameter/primaryColorChange = SubResource("NoiseTexture2D_ohs0c")
+shader_parameter/speed = 0.01
+shader_parameter/cutoff = 1.0
+shader_parameter/primary_cutoff = 0.535
+shader_parameter/yRippleOffset = 9.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh0ct"]
+frequency = 0.0011
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_emi4o"]
+seamless = true
+noise = SubResource("FastNoiseLite_fh0ct")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ohs0c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_80opg"]
+noise = SubResource("FastNoiseLite_ohs0c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5n07"]
+render_priority = 21
+shader = ExtResource("10_qer7r")
+shader_parameter/background_color = Color(0, 0, 0, 0.517647)
+shader_parameter/primary_color = Color(0.981349, 0, 0.185227, 1)
+shader_parameter/secondary_color = Color(1, 0.47451, 0.454902, 0.556863)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_emi4o")
+shader_parameter/primaryColorChange = SubResource("NoiseTexture2D_80opg")
+shader_parameter/speed = 0.01
+shader_parameter/cutoff = 1.0
+shader_parameter/primary_cutoff = 0.535
+shader_parameter/yRippleOffset = 9.5
+
 [sub_resource type="Curve3D" id="Curve3D_qer7r"]
 _data = {
 "points": PackedVector3Array(0.112244, 6.19888e-06, -0.00174046, -0.112244, -6.19888e-06, 0.00174046, -61.9151, 0.595709, 9.28341, 15.3232, 0, 4.54705, -15.3232, 0, -4.54705, -101.077, 0, 5.36905, 11.1643, 0, 7.77512, -11.1643, 0, -7.77512, -132.534, 0, -27.7676, 3.13559, 0, 6.68016, -3.13559, 0, -6.68016, -164.682, 0, -68.2098),
@@ -170,13 +222,21 @@ _data = {
 }
 point_count = 3
 
-[node name="TestWorld" type="Node3D"]
+[node name="HubWorld" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7mb3q")
 
 [node name="Player" parent="." instance=ExtResource("3_tg0jd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118.047, 0.255821, 29.8567)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -152.429, 0.255821, 55.5266)
+head_tilt_amount = 1.5
+BASE_FOV = 80.0
+FOV_CHANGE = 1.0
+gravity = 16.0
+jumpForce = 5.0
+ground_accel = 14.0
+ground_decel = 10.0
+ground_friction = 6.0
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -281,12 +341,17 @@ transform = Transform3D(0.629284, 0, 1.04009, 0, 1.21565, 0, -1.04009, 0, 0.6292
 skeleton = NodePath("../../..")
 
 [node name="Portal" parent="Environment/Buildings/ArchedStoneComplete1" instance=ExtResource("6_ddeqm")]
-transform = Transform3D(0.0620578, 0, 0.998073, 0, 1, 0, -0.998073, 0, 0.0620578, 0.0567283, 3.809, -0.0358479)
-scene_to_load = ExtResource("7_qer7r")
+transform = Transform3D(0.0558031, 0, 0.897479, 0, 0.899211, 0, -0.897479, 0, 0.0558031, 0.0567322, 5.04799, -0.0358429)
+material_override = SubResource("ShaderMaterial_80opg")
+scene_to_load = "res://Maps/MapAreas/world_01.tscn"
 
 [node name="ArchedStoneComplete2" parent="Environment/Buildings" instance=ExtResource("10_fugqt")]
 transform = Transform3D(1.22002, -0.00189564, -0.00286834, 0.00190732, 1.22001, 0.00497264, 0.00286059, -0.0049771, 1.22001, -215.201, 0.0853877, 7.06815)
 skeleton = NodePath("../../..")
+
+[node name="Portal" parent="Environment/Buildings/ArchedStoneComplete2" instance=ExtResource("6_ddeqm")]
+transform = Transform3D(-3.95812e-08, -3.7744e-10, 0.910542, 2.32831e-10, 0.910542, 9.09495e-11, -0.910542, 0, -4.00469e-08, 3.05176e-05, 5.21361, -0.145007)
+material_override = SubResource("ShaderMaterial_o5n07")
 
 [node name="ArchedStoneComplete3" parent="Environment/Buildings" instance=ExtResource("10_fugqt")]
 transform = Transform3D(0.571652, 0, -1.03876, 0, 1.18567, 0, 1.03876, 0, 0.571652, -165.147, 0.0853877, -69.2338)
@@ -333,10 +398,10 @@ curve = SubResource("Curve3D_qag23")
 curve = SubResource("Curve3D_fh0ct")
 
 [node name="QuestTargetObject" parent="." instance=ExtResource("4_20hh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28985, 2.76544, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -145.282, 2.76544, 50.5233)
 targetObjectID = 1
 
 [node name="NPCs" type="Node3D" parent="."]
 
 [node name="QuestNPC" parent="NPCs" instance=ExtResource("5_lwkna")]
-transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -2.79931, 11.1666, 0.299154)
+transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -147.698, 0.479263, 53.1565)

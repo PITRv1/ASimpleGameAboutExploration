@@ -37,7 +37,7 @@ func _on_hitbox_component_area_entered(area: Area3D) -> void:
 func knockback_player():
 	playerRef = Global.player
 	
-	var current_root : Node3D = get_tree().current_scene
+	var current_root : Node3D = Global.game_controller.current_3d_scene
 	var space_state : PhysicsDirectSpaceState3D = current_root.get_world_3d().direct_space_state
 	var origin : Vector3 = playerRef.camera.global_position
 	var direction : Vector3 = -playerRef.camera.global_transform.basis.z.normalized()

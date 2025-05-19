@@ -1,3 +1,4 @@
 extends Node
 
-var player
+var player : Player
+var game_controller : GameController

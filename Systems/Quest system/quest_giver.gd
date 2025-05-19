@@ -24,7 +24,7 @@ func redeemQuest():
 	var player : Player = Global.player
 	if len(player.quest_tracker.completedQuestList) != 0:
 		for quest : Quest in player.quest_tracker.completedQuestList:
-			player.inventory.money += quest.rewardMoneyAmount
+			player.inventory.add_money(quest.rewardMoneyAmount)
 			
 			print("Quest Giver :", quest.rewardMoneyAmount)
 			

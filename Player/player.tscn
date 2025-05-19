@@ -54,7 +54,7 @@ shader = ExtResource("20_7emwf")
 shader_parameter/shadow_intensity = 0.5
 shader_parameter/luminance_threshold = 0.3
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "quest_tracker", "inventory")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("saver_loader", "weapon_controller", "quest_tracker", "inventory")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
 UIInput = ExtResource("2_k53q1")
@@ -62,11 +62,11 @@ MovementInput = ExtResource("3_fhl08")
 InteractionInput = ExtResource("4_00tjw")
 WeaponsInput = ExtResource("5_gu6f8")
 jumpAction = ExtResource("4_vtle1")
+saver_loader = NodePath("Utilities/SaverLoader")
 weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
 quest_tracker = NodePath("Utilities/QuestTracker")
 inventory = NodePath("Utilities/Inventory")
 look_sensitivity = 0.005
-current_speed = 13.0
 air_cap = 1.0
 air_accel = 3000.0
 air_move_speed = 1000.0
