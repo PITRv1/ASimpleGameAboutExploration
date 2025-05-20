@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestGiverSaveData" load_steps=4 format=3 uid="uid://bqhpxk131nb1c"]
+
+[ext_resource type="Script" uid="uid://caw11yaoq5m74" path="res://Systems/Quest system/quest_resource_template.gd" id="1_efq22"]
+[ext_resource type="Resource" uid="uid://b1mofs0m0tqm3" path="res://Assets/Quests/emerald_quest.tres" id="2_lr2vd"]
+[ext_resource type="Script" uid="uid://bt2pu8r2s3se5" path="res://Assets/SaveDataResources/quest_giver_save_data.gd" id="2_ve0m0"]
+
+[resource]
+script = ExtResource("2_ve0m0")
+quest_list = Array[ExtResource("1_efq22")]([ExtResource("2_lr2vd")])
+metadata/_custom_type_script = "uid://bt2pu8r2s3se5"

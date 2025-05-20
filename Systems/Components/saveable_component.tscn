@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byqfgqgsdwbqe"]
+
+[ext_resource type="Script" uid="uid://b87nvvoqafod1" path="res://Systems/Components/saveable_component.gd" id="1_t0arg"]
+
+[node name="SaveableComponent" type="Node" groups=["saveable"]]
+script = ExtResource("1_t0arg")

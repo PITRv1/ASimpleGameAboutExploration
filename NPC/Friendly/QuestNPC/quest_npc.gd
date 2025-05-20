@@ -1,10 +1,12 @@
 extends CharacterBody3D
-
-@export var interactionReciver : InteractionReceiver
-@export var questGiver : QuestGiver
-
+class_name QuestNPC
 
 @export var gravity := 16
+
+
+@export_category("Utilities")
+@export var interactionReciver : InteractionReceiver
+@export var questGiver : QuestGiver
 
 var terrain : Terrain3D
 

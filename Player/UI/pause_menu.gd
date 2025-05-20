@@ -13,3 +13,6 @@ func PauseGame():
 	
 func VisibiliyChanged() -> void:	
 	PauseGame()
+
+func callDefaultSaveCreation():
+	Global.game_controller.saver_loader.createDefaultSave()

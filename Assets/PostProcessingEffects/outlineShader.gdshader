@@ -43,21 +43,21 @@ void vertex() {
 void fragment() {
     vec2 uv = SCREEN_UV;
     vec2 offset = 0.5 / VIEWPORT_SIZE;
-    
+
     // Depth and sky detection
     float depth_sample = texture(DEPTH_TEXTURE, uv).r;
     bool is_sky = depth_sample <= 0.0; // Direct depth buffer value check
-    
+
     // Initialize with sky or original color
     vec3 final_color;
 	if (is_sky) {
 	    final_color = sky_color.rgb;
 		ALPHA = 0.0;
-		
+
 	} else {
 	    final_color = texture(SCREEN_TEXTURE, uv).rgb;
 	}
-	
+
     if(!is_sky) {
         // Lighting calculation
         vec3 view_normal = normalize_normal(texture(NORMAL_TEXTURE, uv).rgb);
@@ -89,8 +89,8 @@ void fragment() {
         vec3 shaded_color = mix(background_color, shadow_color, shadow);
         final_color = edge > edge_threshold ? line_color : shaded_color;
     }
-	
+
     float luminance = dot(final_color, vec3(0.2126, 0.7152, 0.0722));
-	
+
     ALBEDO = final_color;
 }

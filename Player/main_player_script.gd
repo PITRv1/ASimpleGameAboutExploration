@@ -89,24 +89,12 @@ func _ready():
 
 	#Input signal connections
 	jumpAction.triggered.connect(StartJumpBuffer)
+	
+	
 	#TODO VERY TEMPORARY MAKE A NORMAL EQUIP SYSTEM PLS
 	#weapon_controller.equip_weapon(weapon_controller.avalible_weapons["Shovel"])
-	load_saved_values()
-	
-	
-	
-func _exit_tree() -> void:
-	save_loaded_values()
 
 ########################################################
-
-func load_saved_values():
-	saver_loader.loadSave()
-
-func save_loaded_values():
-	saver_loader.writeSave()
-
-
 #region Camera effets ------ Smoothing ## Tilting ## Bobing
 func fov_change(delta):
 	var velocity_clamped = clamp(velocity.length(), 0.5, 20)

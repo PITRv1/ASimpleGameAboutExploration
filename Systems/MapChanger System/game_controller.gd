@@ -4,6 +4,9 @@ class_name GameController
 @export var world_3d : Node3D
 @export var gui : Control
 
+@export_category("Saver System")
+@export var saver_loader : SaverLoader
+
 var current_3d_scene : Node3D
 var current_gui_scene : Control
 
@@ -12,6 +15,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	current_3d_scene = $World3D/HubWorld
+	Global.game_controller.saver_loader.loadSave()
 
 func change_3d_scene(new_scene : String, delete : bool = true, keep_running : bool = false) -> void :
 	if current_3d_scene != null:
@@ -24,6 +28,7 @@ func change_3d_scene(new_scene : String, delete : bool = true, keep_running : bo
 	var new = load(new_scene).instantiate()
 	world_3d.add_child(new)
 	current_3d_scene = new
+	Global.game_controller.saver_loader.loadSave()
 
 func change_gui_scene(new_scene : String, delete : bool = true, keep_running : bool = false) -> void :
 	if current_gui_scene != null:

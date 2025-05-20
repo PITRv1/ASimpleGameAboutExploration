@@ -46,6 +46,7 @@ folder_colors={
 [global_group]
 
 current_terrain="the terrain of the curretly loaded map"
+saveable=""
 
 [input]
 

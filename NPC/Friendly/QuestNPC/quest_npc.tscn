@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0t6vdas64nli"]
+[gd_scene load_steps=19 format=3 uid="uid://b0t6vdas64nli"]
 
 [ext_resource type="Script" uid="uid://c83omarf6f48w" path="res://NPC/Friendly/QuestNPC/quest_npc.gd" id="1_icjnx"]
 [ext_resource type="PackedScene" uid="uid://d1nkr62gaodmv" path="res://Systems/InteractionSystem/interaction_receiver.tscn" id="2_kejyp"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="3_d6veq"]
 [ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="4_o2mkb"]
 [ext_resource type="PackedScene" uid="uid://d32ooqesmbk2u" path="res://Systems/Quest system/quest_giver.tscn" id="5_o2mkb"]
-[ext_resource type="Script" uid="uid://caw11yaoq5m74" path="res://Systems/Quest system/quest_resource_template.gd" id="6_ik63a"]
-[ext_resource type="Resource" uid="uid://b1mofs0m0tqm3" path="res://Assets/Quests/emerald_quest.tres" id="7_yodox"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fxrq"]
 
@@ -100,4 +98,3 @@ shape = SubResource("BoxShape3D_g11jn")
 [node name="Utilities" type="Node" parent="."]
 
 [node name="QuestGiver" parent="Utilities" instance=ExtResource("5_o2mkb")]
-quest_list = Array[ExtResource("6_ik63a")]([ExtResource("7_yodox")])

@@ -151,5 +151,19 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 96
 text = "Resume"
 
+[node name="CreateDefaultSaveButton" type="Button" parent="PauseMenu/MiddleContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -370.0
+offset_top = 195.0
+offset_right = 370.0
+offset_bottom = 335.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 96
+text = "Create Def Save"
+
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="VisibiliyChanged"]
 [connection signal="pressed" from="PauseMenu/MiddleContainer/ResumeButton" to="." method="inputHandelerOnEscapePressed"]
+[connection signal="pressed" from="PauseMenu/MiddleContainer/CreateDefaultSaveButton" to="PauseMenu" method="callDefaultSaveCreation"]

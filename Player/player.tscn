@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://nwtjv17dqyx5"]
+[gd_scene load_steps=28 format=3 uid="uid://nwtjv17dqyx5"]
 
 [ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://cveufc2cx61jb" path="res://InputMappings/interact.tres" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="11_5htga"]
 [ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="12_p5o4e"]
-[ext_resource type="Script" uid="uid://bnfqu4tt64gmp" path="res://Systems/SaverLoader System/game_saver.gd" id="12_pisgm"]
 [ext_resource type="Resource" uid="uid://dah8042kwp2tk" path="res://InputMappings/attack.tres" id="14_lfmf2"]
 [ext_resource type="Resource" uid="uid://g3kescivuyi5" path="res://InputMappings/aim_down_sites.tres" id="15_pisgm"]
 [ext_resource type="PackedScene" uid="uid://d28w1uawnetlh" path="res://Systems/Quest system/quest_tracker.tscn" id="18_b1ygp"]
@@ -54,7 +53,7 @@ shader = ExtResource("20_7emwf")
 shader_parameter/shadow_intensity = 0.5
 shader_parameter/luminance_threshold = 0.3
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("saver_loader", "weapon_controller", "quest_tracker", "inventory")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "quest_tracker", "inventory")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
 UIInput = ExtResource("2_k53q1")
@@ -62,12 +61,10 @@ MovementInput = ExtResource("3_fhl08")
 InteractionInput = ExtResource("4_00tjw")
 WeaponsInput = ExtResource("5_gu6f8")
 jumpAction = ExtResource("4_vtle1")
-saver_loader = NodePath("Utilities/SaverLoader")
 weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
 quest_tracker = NodePath("Utilities/QuestTracker")
 inventory = NodePath("Utilities/Inventory")
 look_sensitivity = 0.005
-ground_friction = 0.0
 air_cap = 1.0
 air_accel = 3000.0
 air_move_speed = 1000.0
@@ -94,9 +91,8 @@ unique_name_in_owner = true
 [node name="InteractionInitiator" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("inputHandeler") instance=ExtResource("5_od3ui")]
 inputHandeler = NodePath("../../../../Utilities/InputHandeler")
 
-[node name="WeaponController" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler", "saver_loader") instance=ExtResource("7_p5o4e")]
+[node name="WeaponController" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler") instance=ExtResource("7_p5o4e")]
 input_handeler = NodePath("../../../../Utilities/InputHandeler")
-saver_loader = NodePath("../../../../Utilities/SaverLoader")
 
 [node name="StairsBelowRayCast" type="RayCast3D" parent="."]
 
@@ -117,9 +113,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_gu6f8")
 
 [node name="Utilities" type="Node" parent="."]
-
-[node name="SaverLoader" type="Node" parent="Utilities"]
-script = ExtResource("12_pisgm")
 
 [node name="InputHandeler" type="Node" parent="Utilities"]
 script = ExtResource("3_btcbx")
