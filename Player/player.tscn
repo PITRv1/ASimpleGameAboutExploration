@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://nwtjv17dqyx5"]
+[gd_scene load_steps=30 format=3 uid="uid://nwtjv17dqyx5"]
 
 [ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
@@ -17,16 +17,15 @@
 [ext_resource type="Resource" uid="uid://dah8042kwp2tk" path="res://InputMappings/attack.tres" id="14_lfmf2"]
 [ext_resource type="Resource" uid="uid://g3kescivuyi5" path="res://InputMappings/aim_down_sites.tres" id="15_pisgm"]
 [ext_resource type="PackedScene" uid="uid://d28w1uawnetlh" path="res://Systems/Quest system/quest_tracker.tscn" id="18_b1ygp"]
+[ext_resource type="PackedScene" uid="uid://byqfgqgsdwbqe" path="res://Systems/Components/saveable_component.tscn" id="19_7emwf"]
 [ext_resource type="Script" uid="uid://boj8atskudkmk" path="res://Player/inventory.gd" id="19_o28un"]
 [ext_resource type="Shader" uid="uid://boye2b5qy736l" path="res://Assets/PostProcessingEffects/lightShader.gdshader" id="20_7emwf"]
+[ext_resource type="Resource" uid="uid://b3a2gv5sy3qj3" path="res://Assets/SaveDataResources/playerSaveData.tres" id="20_hshwv"]
 [ext_resource type="Shader" uid="uid://5w15e7f3loyp" path="res://Assets/PostProcessingEffects/outlineShader.gdshader" id="20_n471f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4ntmi"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gu6f8"]
-size = Vector3(1, 2, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_7emwf"]
 flip_faces = true
@@ -53,7 +52,10 @@ shader = ExtResource("20_7emwf")
 shader_parameter/shadow_intensity = 0.5
 shader_parameter/luminance_threshold = 0.3
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "quest_tracker", "inventory")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gu6f8"]
+size = Vector3(1, 2, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("saveable_component", "weapon_controller", "quest_tracker", "inventory")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
 UIInput = ExtResource("2_k53q1")
@@ -61,6 +63,7 @@ MovementInput = ExtResource("3_fhl08")
 InteractionInput = ExtResource("4_00tjw")
 WeaponsInput = ExtResource("5_gu6f8")
 jumpAction = ExtResource("4_vtle1")
+saveable_component = NodePath("SaveableComponent")
 weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
 quest_tracker = NodePath("Utilities/QuestTracker")
 inventory = NodePath("Utilities/Inventory")
@@ -102,16 +105,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516717, -0.73318)
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("input_handeler") instance=ExtResource("2_4ntmi")]
 input_handeler = NodePath("../Utilities/InputHandeler")
 
-[node name="HealthComponent" parent="." instance=ExtResource("11_5htga")]
-
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_p5o4e")]
-health_component = NodePath("../HealthComponent")
-parentIsPlayer = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_gu6f8")
-
 [node name="Utilities" type="Node" parent="."]
 
 [node name="InputHandeler" type="Node" parent="Utilities"]
@@ -138,15 +131,36 @@ one_shot = true
 [node name="Inventory" type="Node" parent="Utilities"]
 script = ExtResource("19_o28un")
 
-[node name="UnshadedShaderLayer" type="MeshInstance3D" parent="."]
+[node name="Shaders" type="Node3D" parent="."]
+
+[node name="UnshadedShaderLayer" type="MeshInstance3D" parent="Shaders"]
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_7emwf")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_hshwv")
 
-[node name="LightShaderLayer" type="MeshInstance3D" parent="."]
+[node name="LightShaderLayer" type="MeshInstance3D" parent="Shaders"]
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_hshwv")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_gpjlu")
+
+[node name="SaveableComponent" parent="." instance=ExtResource("19_7emwf")]
+save_id = "PlayerSaveData"
+save_data_resource = ExtResource("20_hshwv")
+
+[node name="HealthComponent" parent="." instance=ExtResource("11_5htga")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_p5o4e")]
+health_component = NodePath("../HealthComponent")
+parentIsPlayer = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_gu6f8")
 
 [connection signal="timeout" from="Utilities/Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="Utilities/Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="onDataLoaded" from="SaveableComponent" to="Head/CameraSmooth/PlayerCamera/WeaponController" method="applySavedData"]
+[connection signal="onDataLoaded" from="SaveableComponent" to="Utilities/QuestTracker" method="applySavedData"]
+[connection signal="onDataLoaded" from="SaveableComponent" to="Utilities/Inventory" method="applySavedData"]

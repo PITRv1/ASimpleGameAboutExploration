@@ -18,7 +18,7 @@ noise = SubResource("FastNoiseLite_ydb4i")
 noise = SubResource("FastNoiseLite_tvc24")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x8dxn"]
-render_priority = 21
+render_priority = 22
 shader = ExtResource("3_kf7w2")
 shader_parameter/background_color = Color(0, 0, 0, 0.517647)
 shader_parameter/primary_color = Color(5.58317e-06, 0.752069, 0.76111, 1)

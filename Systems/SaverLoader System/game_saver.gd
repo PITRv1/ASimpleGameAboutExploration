@@ -21,17 +21,6 @@ func writeSave():
 		if component.has_changed and component.save_data_resource:
 			saved_game.component_data[component.save_id] = component.save_data_resource.duplicate()
 			component.has_changed = false
-	
-	#Saving custom stuff here
-	saved_game.avalible_weapons = playerRef.weapon_controller.avalible_weapons
-	
-	saved_game.money_amount = playerRef.inventory.money
-	
-	#Quest value Saves
-	#Player side:
-	saved_game.activeQuest = playerRef.quest_tracker.activeQuest
-	saved_game.completedQuestList = playerRef.quest_tracker.completedQuestList
-	
 
 	ResourceSaver.save(saved_game, SAVE_GAME_PATH)
 	latest_save = saved_game
@@ -56,15 +45,6 @@ func loadSave():
 				component.onDataLoaded.emit()
 	
 	
-	#Loading custom stuff here
-	playerRef.weapon_controller.avalible_weapons = saved_game.avalible_weapons
-	
-	playerRef.inventory.set_money(saved_game.money_amount)
-	
-	playerRef.quest_tracker.activeQuest = saved_game.activeQuest
-	playerRef.quest_tracker.completedQuestList = saved_game.completedQuestList
-
-
 func clearSave():
 	var default_data := load(DEFAULT_SAVE_PATH) as SavedGame
 	var cloned_data = default_data.duplicate(true)
@@ -83,16 +63,5 @@ func createDefaultSave():
 	for component:SaveableComponent in saveables:
 		if component.has_changed and component.save_data_resource:
 			saved_game.component_data[component.save_id] = component.save_data_resource.duplicate()
-			component.has_changed = false
-	
-	#Saving custom stuff here
-	saved_game.avalible_weapons = playerRef.weapon_controller.avalible_weapons
-	
-	saved_game.money_amount = playerRef.inventory.money
-	
-	#Quest value Saves
-	#Player side:
-	saved_game.activeQuest = playerRef.quest_tracker.activeQuest
-	saved_game.completedQuestList = playerRef.quest_tracker.completedQuestList
-	
+
 	ResourceSaver.save(saved_game, DEFAULT_SAVE_PATH)

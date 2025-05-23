@@ -11,7 +11,7 @@ extends CharacterBody3D
 @export var jumpAction : GUIDEAction
 
 @export_category("Controllers")
-@export var saver_loader : SaverLoader
+@export var saveable_component : SaveableComponent
 @export var weapon_controller : WeaponController
 @export var quest_tracker : QuestTracker
 @export var inventory : Inventory
@@ -90,10 +90,6 @@ func _ready():
 	#Input signal connections
 	jumpAction.triggered.connect(StartJumpBuffer)
 	
-	
-	#TODO VERY TEMPORARY MAKE A NORMAL EQUIP SYSTEM PLS
-	#weapon_controller.equip_weapon(weapon_controller.avalible_weapons["Shovel"])
-
 ########################################################
 #region Camera effets ------ Smoothing ## Tilting ## Bobing
 func fov_change(delta):

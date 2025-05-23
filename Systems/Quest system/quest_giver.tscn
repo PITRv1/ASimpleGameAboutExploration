@@ -8,7 +8,7 @@
 script = ExtResource("1_ocl8q")
 
 [node name="SaveableComponent" parent="." instance=ExtResource("2_rcwck")]
-save_id = "QuestGiverSave"
+save_id = "QuestGiverSaveData"
 save_data_resource = ExtResource("3_tblqm")
 
 [connection signal="onDataLoaded" from="SaveableComponent" to="." method="applySavedData"]

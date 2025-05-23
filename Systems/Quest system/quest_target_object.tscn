@@ -1,20 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://da71cb620nk4w"]
+[gd_scene load_steps=12 format=3 uid="uid://da71cb620nk4w"]
 
 [ext_resource type="Script" uid="uid://dstp2svvmmqbs" path="res://Systems/Quest system/quest_target_object.gd" id="1_l5cdl"]
 [ext_resource type="PackedScene" uid="uid://d1nkr62gaodmv" path="res://Systems/InteractionSystem/interaction_receiver.tscn" id="2_jw8bf"]
+[ext_resource type="Shader" uid="uid://d4k1uhpn8b101" path="res://Assets/PostProcessingEffects/simpleOutline.gdshader" id="2_nogbd"]
+[ext_resource type="Shader" uid="uid://c785spb6drbgr" path="res://Assets/PostProcessingEffects/solidColor.gdshader" id="3_a157t"]
+[ext_resource type="PackedScene" uid="uid://byqfgqgsdwbqe" path="res://Systems/Components/saveable_component.tscn" id="3_vgdsm"]
+[ext_resource type="Script" uid="uid://dvwunsqc7ik3o" path="res://Assets/SaveDataResources/quest_target_obj_save_data.gd" id="4_nfxpj"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_v1ald"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aesj7"]
+render_priority = 20
+shader = ExtResource("2_nogbd")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/size = 1.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nfxpj"]
+render_priority = 21
+next_pass = SubResource("ShaderMaterial_aesj7")
+shader = ExtResource("3_a157t")
+shader_parameter/albedo_color = Color(1, 0.756863, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nogbd"]
+radius = 0.3245
+height = 1.1
+radial_segments = 4
+rings = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vgdsm"]
 radius = 0.682646
 
-[node name="QuestTargetObject" type="Node3D"]
+[sub_resource type="Resource" id="Resource_g76l1"]
+script = ExtResource("4_nfxpj")
+is_collected = false
+metadata/_custom_type_script = "uid://dvwunsqc7ik3o"
+
+[node name="QuestTargetObject" type="Node3D" node_paths=PackedStringArray("saveable_component")]
 script = ExtResource("1_l5cdl")
+saveable_component = NodePath("SaveableComponent")
 
 [node name="Visual" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visual"]
-mesh = SubResource("SphereMesh_v1ald")
+material_override = SubResource("ShaderMaterial_nfxpj")
+mesh = SubResource("CapsuleMesh_nogbd")
 
 [node name="InteractionReceiver" parent="." instance=ExtResource("2_jw8bf")]
 
@@ -22,4 +49,8 @@ mesh = SubResource("SphereMesh_v1ald")
 shape = SubResource("SphereShape3D_vgdsm")
 debug_color = Color(0.631463, 0.344968, 1, 0.42)
 
+[node name="SaveableComponent" parent="." instance=ExtResource("3_vgdsm")]
+save_data_resource = SubResource("Resource_g76l1")
+
 [connection signal="OnInteractDetected" from="InteractionReceiver" to="." method="collect"]
+[connection signal="onDataLoaded" from="SaveableComponent" to="." method="applySavedData"]

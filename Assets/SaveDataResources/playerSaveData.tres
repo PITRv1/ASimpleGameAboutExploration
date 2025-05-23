@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerSaveData" load_steps=2 format=3 uid="uid://b3a2gv5sy3qj3"]
+
+[ext_resource type="Script" uid="uid://gwj6xh0r2ygu" path="res://Assets/SaveDataResources/player_save_data.gd" id="1_2w6io"]
+
+[resource]
+script = ExtResource("1_2w6io")
+avalible_weapons = {}
+money_amount = 0
+completedQuestList = []
+metadata/_custom_type_script = "uid://gwj6xh0r2ygu"

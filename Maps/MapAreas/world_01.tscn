@@ -112,5 +112,9 @@ mesh = SubResource("ArrayMesh_l35je")
 scene_to_load = "res://Maps/GameWorldHub.tscn"
 
 [node name="QuestTargetObject" parent="." instance=ExtResource("5_y4uam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10056, 1.61354, -3.60474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47976, 2.61412, -5.23118)
 targetObjectID = 1
+
+[node name="QuestTargetObject2" parent="." instance=ExtResource("5_y4uam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47976, 2.61412, -1.38786)
+targetObjectID = 2

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="QuestTargetObjSaveData" load_steps=2 format=3 uid="uid://culxnjhhndmnk"]
+
+[ext_resource type="Script" uid="uid://dvwunsqc7ik3o" path="res://Assets/SaveDataResources/quest_target_obj_save_data.gd" id="1_2ggpk"]
+
+[resource]
+script = ExtResource("1_2ggpk")
+is_collected = false
+metadata/_custom_type_script = "uid://dvwunsqc7ik3o"

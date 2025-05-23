@@ -227,7 +227,7 @@ point_count = 3
 environment = SubResource("Environment_7mb3q")
 
 [node name="Player" parent="." instance=ExtResource("3_tg0jd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6154, 0.255821, -9.76667)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.54, 0.255821, 71.6927)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -391,4 +391,4 @@ curve = SubResource("Curve3D_fh0ct")
 [node name="NPCs" type="Node3D" parent="."]
 
 [node name="QuestNPC" parent="NPCs" instance=ExtResource("5_lwkna")]
-transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, 19.0116, 2.06025, -15.6904)
+transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -158.166, 2.06025, 63.1156)

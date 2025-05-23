@@ -3,18 +3,15 @@ class_name Inventory
 
 signal OnMoneyChanged(new_amount)
 
-var money : int
-
 func add_money(value):
-	money += value
-	emit_signal("OnMoneyChanged", money)
+	Global.player.saveable_component.save_data_resource.money += value
+	Global.player.saveable_component.has_changed = true
+	emit_signal("OnMoneyChanged", Global.player.saveable_component.save_data_resource.money)
 
 func subtract_money(value):
-	money -= value
-	emit_signal("OnMoneyChanged", money)
+	Global.player.saveable_component.save_data_resource.money -= value
+	Global.player.saveable_component.has_changed = true
+	emit_signal("OnMoneyChanged", Global.player.saveable_component.save_data_resource.money)
 
-func set_money(value):
-	money = value
-	emit_signal("OnMoneyChanged", money)
-	
-	
+func applySavedData():
+	emit_signal("OnMoneyChanged", Global.player.saveable_component.save_data_resource.money)	
