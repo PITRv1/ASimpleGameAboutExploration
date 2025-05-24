@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dx5hgnutxflij"]
+[gd_scene load_steps=42 format=3 uid="uid://dx5hgnutxflij"]
 
 [ext_resource type="Shader" uid="uid://c3o165ptvdjdd" path="res://Assets/PostProcessingEffects/skyShader.gdshader" id="1_xnv1m"]
 [ext_resource type="Shader" uid="uid://bac1p4a2qg8wi" path="res://Assets/PostProcessingEffects/grassShader.gdshader" id="2_fksp0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://1ab7xbir40h2" path="res://Assets/Models/Buildings/arched_stone_complete.tscn" id="10_fugqt"]
 [ext_resource type="PackedScene" uid="uid://yy5q1vb3buis" path="res://Assets/Models/Nature/Path/ground_path.tscn" id="10_gl7b7"]
 [ext_resource type="Shader" uid="uid://beib55g20ff5m" path="res://Assets/PostProcessingEffects/portal.gdshader" id="10_qer7r"]
+[ext_resource type="PackedScene" uid="uid://oxm2j0fsvl03" path="res://Assets/Models/Buildings/Shack/quest_man_shack.tscn" id="14_qer7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcaf"]
 shader = ExtResource("1_xnv1m")
@@ -227,7 +228,7 @@ point_count = 3
 environment = SubResource("Environment_7mb3q")
 
 [node name="Player" parent="." instance=ExtResource("3_tg0jd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.54, 0.255821, 71.6927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2933, 0.255821, 2.38239)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -258,6 +259,10 @@ skeleton = NodePath("../..")
 
 [node name="MildRoundRock2" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
 transform = Transform3D(2.04291, 2.24778, 7.76425e-15, -0.297054, 0.466223, -4.30446, -1.68451, 2.64381, 0.759071, 25.6562, 2.50873, -35.6636)
+skeleton = NodePath("../..")
+
+[node name="MildRoundRock12" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
+transform = Transform3D(-1.94548, -3.08203, -2.70879, 1.07759, 1.64456, -4.99859, 2.65821, -2.92234, 0.0438284, 49.7005, 5.46289, -17.0948)
 skeleton = NodePath("../..")
 
 [node name="MildRoundRock3" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
@@ -348,10 +353,16 @@ material_override = SubResource("ShaderMaterial_o5n07")
 transform = Transform3D(0.571652, 0, -1.03876, 0, 1.18567, 0, 1.03876, 0, 0.571652, -165.147, 0.0853877, -69.2338)
 skeleton = NodePath("../../..")
 
+[node name="QuestManShack" parent="Environment/Buildings" instance=ExtResource("14_qer7r")]
+transform = Transform3D(0.892893, 0, -0.45027, 0, 1, 0, 0.45027, 0, 0.892893, 38.5771, 1.32065, -22.0094)
+
 [node name="Nature" type="Node3D" parent="Environment"]
 
 [node name="Tree" parent="Environment/Nature" instance=ExtResource("9_4ef4c")]
 transform = Transform3D(0.979838, 0.199795, 0, -0.196567, 0.964005, -0.179043, -0.0357719, 0.175433, 0.983841, -206.542, 1.10456, 33.0974)
+
+[node name="Tree10" parent="Environment/Nature" instance=ExtResource("9_4ef4c")]
+transform = Transform3D(0.896603, 0.126504, 0.0249906, -0.120176, 0.883405, -0.160245, -0.0467511, 0.155298, 0.891191, 19.5864, 1.66559, -30.2756)
 
 [node name="Tree5" parent="Environment/Nature" instance=ExtResource("9_4ef4c")]
 transform = Transform3D(0.979838, 0.199795, -3.66509e-09, -0.195684, 0.959673, 0.20183, 0.0403247, -0.197761, 0.979421, -207.581, 1.10456, -21.8399)
@@ -391,4 +402,4 @@ curve = SubResource("Curve3D_fh0ct")
 [node name="NPCs" type="Node3D" parent="."]
 
 [node name="QuestNPC" parent="NPCs" instance=ExtResource("5_lwkna")]
-transform = Transform3D(0.115318, 0, -0.993329, 0, 1, 0, 0.993329, 0, 0.115318, -158.166, 2.06025, 63.1156)
+transform = Transform3D(-0.877807, 0, 0.479014, 0, 1, 0, -0.479014, 0, -0.877807, 36.3432, 1.59871, -20.9291)
