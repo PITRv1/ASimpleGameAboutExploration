@@ -55,7 +55,7 @@ shader_parameter/luminance_threshold = 0.3
 [sub_resource type="BoxShape3D" id="BoxShape3D_gu6f8"]
 size = Vector3(1, 2, 1)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("saveable_component", "weapon_controller", "quest_tracker", "inventory")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("saveable_component", "weapon_controller", "player_ui_controller", "quest_tracker", "inventory")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
 UIInput = ExtResource("2_k53q1")
@@ -65,6 +65,7 @@ WeaponsInput = ExtResource("5_gu6f8")
 jumpAction = ExtResource("4_vtle1")
 saveable_component = NodePath("SaveableComponent")
 weapon_controller = NodePath("Head/CameraSmooth/PlayerCamera/WeaponController")
+player_ui_controller = NodePath("PlayerUI")
 quest_tracker = NodePath("Utilities/QuestTracker")
 inventory = NodePath("Utilities/Inventory")
 look_sensitivity = 0.005

@@ -228,7 +228,7 @@ point_count = 3
 environment = SubResource("Environment_7mb3q")
 
 [node name="Player" parent="." instance=ExtResource("3_tg0jd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2933, 0.255821, 2.38239)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.225, 0.255821, 12.7383)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -274,7 +274,7 @@ transform = Transform3D(-3.2029, 0.00909209, 1.51214, -1.26672, -2.42438, -2.957
 skeleton = NodePath("../..")
 
 [node name="MildRoundRock4" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
-transform = Transform3D(-1.53065, 1.76136, -0.038261, -0.7058, -1.35083, -1.64767, -0.993084, -1.75474, 1.22999, -26.7069, 2.56113, 30.4261)
+transform = Transform3D(-1.53065, 1.76136, -0.038261, -0.7058, -1.35083, -1.64767, -0.993084, -1.75474, 1.22999, -22.8465, 2.4128, 24.5815)
 skeleton = NodePath("../..")
 
 [node name="MildRoundRock7" parent="Environment/Minerals" instance=ExtResource("4_7y1fj")]
@@ -398,6 +398,26 @@ curve = SubResource("Curve3D_qag23")
 
 [node name="GroundPath3" parent="Environment/Paths" instance=ExtResource("10_gl7b7")]
 curve = SubResource("Curve3D_fh0ct")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155.402, 11.1271, 5.26411)
+use_collision = true
+size = Vector3(5.56152, 4.97681, 4.27441)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.734, 29.286, -14.205)
+use_collision = true
+size = Vector3(5.56152, 4.97681, 4.27441)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.012, 29.286, -14.205)
+use_collision = true
+size = Vector3(5.56152, 4.97681, 4.27441)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.148, 21.2754, -48.6934)
+use_collision = true
+size = Vector3(5.56152, 4.97681, 4.27441)
 
 [node name="NPCs" type="Node3D" parent="."]
 

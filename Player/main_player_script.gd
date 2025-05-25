@@ -13,6 +13,7 @@ extends CharacterBody3D
 @export_category("Controllers")
 @export var saveable_component : SaveableComponent
 @export var weapon_controller : WeaponController
+@export var player_ui_controller : PlayerUIController
 @export var quest_tracker : QuestTracker
 @export var inventory : Inventory
 

@@ -79,6 +79,7 @@ _data = {
 
 [node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("hitbox_component", "animation_player")]
 script = ExtResource("1_ygasu")
+grapple_reach = 50.0
 weapon_position = Vector3(0.537, -0.507, -0.655)
 hitbox_component = NodePath("HitboxComponent")
 animation_player = NodePath("AnimationPlayer")

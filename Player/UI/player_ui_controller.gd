@@ -4,6 +4,8 @@ class_name PlayerUIController
 @export var input_handeler : InputHandeler
 
 @export_group("UI elements")
+@export var HUD : PlayerHud
+
 @export var pause_menu : PauseMenu
 
 enum UIElement {

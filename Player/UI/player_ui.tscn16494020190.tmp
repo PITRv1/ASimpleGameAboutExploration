@@ -1,16 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsef5yewsks8e"]
+[gd_scene load_steps=7 format=3 uid="uid://dsef5yewsks8e"]
 
 [ext_resource type="Script" uid="uid://dkhpv80vnq3sl" path="res://Player/UI/player_ui_controller.gd" id="1_qcm1t"]
 [ext_resource type="Script" uid="uid://b15g5254dc8yc" path="res://Player/UI/pause_menu.gd" id="2_agak2"]
 [ext_resource type="Script" uid="uid://cu3xm8gc7cbq0" path="res://Player/UI/player_hud.gd" id="3_2c8bc"]
 [ext_resource type="Script" uid="uid://ccrkdown0y0ju" path="res://Player/UI/money_display.gd" id="3_p3fqj"]
 [ext_resource type="Script" uid="uid://sopywuwh2hwh" path="res://Player/UI/crosshair.gd" id="4_xowwv"]
-[ext_resource type="Texture2D" uid="uid://c0vxsy7hcfi1e" path="res://Assets/Textures/recticleLeft.png" id="5_mu1y6"]
-[ext_resource type="Texture2D" uid="uid://mh2m2qxnv47u" path="res://Assets/Textures/recticleRight.png" id="6_63fe7"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2c8bc"]
 
-[node name="PlayerUI" type="Control" node_paths=PackedStringArray("HUD", "pause_menu")]
+[node name="PlayerUI" type="Control" node_paths=PackedStringArray("pause_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -20,10 +18,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_qcm1t")
-HUD = NodePath("PlayerHud")
 pause_menu = NodePath("PauseMenu")
 
-[node name="PlayerHud" type="Control" parent="." node_paths=PackedStringArray("crosshair")]
+[node name="PlayerHud" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +29,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_2c8bc")
-crosshair = NodePath("Crosshair")
 
 [node name="MoneyContainer" type="Control" parent="PlayerHud" node_paths=PackedStringArray("money_container")]
 layout_mode = 1
@@ -88,71 +84,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_xowwv")
 radius = 1.0
-grapple_color = Color(1, 0.815686, 0, 1)
-
-[node name="HpProgress" type="TextureProgressBar" parent="PlayerHud/Crosshair"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -35.0
-offset_right = 27.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-step = 0.1
-value = 0.5
-fill_mode = 4
-radial_initial_angle = 183.0
-nine_patch_stretch = true
-texture_under = ExtResource("5_mu1y6")
-texture_progress = ExtResource("5_mu1y6")
-tint_under = Color(1, 0.362591, 0.295235, 1)
-tint_progress = Color(0, 0.965852, 0, 1)
-
-[node name="AbilityProgress" type="TextureProgressBar" parent="PlayerHud/Crosshair"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.6735
-offset_top = -34.0
-offset_right = 50.3265
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-step = 0.1
-value = 27.2
-fill_mode = 5
-radial_initial_angle = 175.0
-nine_patch_stretch = true
-texture_under = ExtResource("6_63fe7")
-texture_progress = ExtResource("6_63fe7")
-tint_under = Color(1, 1, 1, 0.109804)
-tint_progress = Color(3.85046e-06, 0.835804, 0.82822, 1)
-
-[node name="MiddleCrosshair" type="ColorRect" parent="PlayerHud/Crosshair"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+thickness = 5.0
 
 [node name="DialogueLayer" type="Control" parent="."]
 layout_mode = 1

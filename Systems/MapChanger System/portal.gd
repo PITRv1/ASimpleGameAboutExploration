@@ -14,8 +14,7 @@ func _ready() -> void:
 
 func load_scene(body):
 	if body is Player:
-		
-		#Before loading the new scene save the changes that happened during the current one	
+		#Before loading the new scene save the changes that happened during the current one
 		Global.game_controller.saver_loader.writeSave()
 		Global.game_controller.call_deferred("change_3d_scene", scene_to_load)
 

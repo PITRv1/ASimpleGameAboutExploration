@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpnrqlmdt4be8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0f3lu"]
+radius = 1.0
+height = 2.0
+radial_segments = 10
+rings = 10
+
+[node name="GrapplePointvisual" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_0f3lu")

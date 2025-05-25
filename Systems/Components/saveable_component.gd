@@ -1,6 +1,7 @@
 extends Node
 class_name SaveableComponent
 
+@warning_ignore("unused_signal")
 signal onDataLoaded
 
 @export var save_id : String
@@ -14,7 +15,7 @@ func _ready():
 	
 	if save_id == "":
 		save_id = _generate_default_id()
-		push_warning("SaveableComponent auto-assigned ID: " + save_id)
+		#Generate unique ide for none defined stuff (allows for multiple auto generated unique save entries)s
 
 func _generate_default_id():
 	#For things that need to be saved but have multiple instance across the project we generate a hash based on the position of their parent
