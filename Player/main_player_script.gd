@@ -208,9 +208,12 @@ func _handle_ground_physics(delta: float) -> void:
 	
 	if add_speed_till_cap > 0:
 		var accel_speed = ground_accel * delta * current_speed
+		
+		#weapon_controller.weapon_bob(delta, 8.0, 3.0, 3.0)
 		self.velocity += accel_speed * wish_dir  
 	
 	friction(0.0, ground_friction, delta)
+	
 
 func _handle_air_physics(delta: float) -> void:
 	var cur_speed_in_wish_dir = self.velocity.dot(wish_dir)
@@ -267,6 +270,8 @@ func update_input(delta):
 		_handle_air_physics(delta)
 		
 	_handle_jump_physics()
+	weapon_controller.sway_weapon(delta, false)
+	
 
 
 func update_velocity(delta):

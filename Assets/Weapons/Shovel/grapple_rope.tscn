@@ -1,13 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://sub1txnrtw0v"]
 
-[ext_resource type="Shader" uid="uid://can6xdl3pkwju" path="res://Assets/PostProcessingEffects/perObjectDepthOutline.gdshader" id="1_b1wna"]
+[ext_resource type="Shader" uid="uid://d4k1uhpn8b101" path="res://Assets/PostProcessingEffects/simpleOutline.gdshader" id="1_bbh1i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1wna"]
 render_priority = 22
-shader = ExtResource("1_b1wna")
-shader_parameter/solid_color = Color(0.257257, 0.117973, 7.21961e-08, 1)
-shader_parameter/outline_threshold = 0.31
-shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader = ExtResource("1_bbh1i")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/size = 1.12
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wybfw"]
 top_radius = 0.05

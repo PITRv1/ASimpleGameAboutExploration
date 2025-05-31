@@ -12,8 +12,13 @@ extends BaseWeapon
 @export var break_offset_factor := .5
 @export var rope : Node3D
 
+
 var grapple_point_visual_scene : PackedScene = preload("res://Assets/Weapons/Shovel/grapple_point.tscn")
 var grapple_point_visual : Node3D
+
+#var rope_scene : PackedScene = preload("res://Assets/Weapons/Shovel/grapple_rope.tscn")
+#var rope : Node3D
+
 
 var isHeld :bool = false
 var chargupTimer : float = 1.0
@@ -50,7 +55,9 @@ func ads():
 
 func _ready() -> void:
 	grapple_point_visual = grapple_point_visual_scene.instantiate()
+	#rope = rope_scene.instantiate()
 	Global.game_controller.current_3d_scene.add_child(grapple_point_visual)
+	#Global.game_controller.current_3d_scene.add_child(rope)
 	hide_grappler_visual()
 
 func _process(delta: float) -> void:
@@ -135,9 +142,9 @@ func pull_in_player(delta):
 		var spring_force = spring_force_magnitude * target_dir
 		
 		var vel_dot := Global.player.velocity.dot(target_dir)
-		var damping = -damping * vel_dot * target_dir
+		var applied_damping = -damping * vel_dot * target_dir
 		
-		force = spring_force + damping
+		force = spring_force + applied_damping
 	
 	Global.player.velocity += force * delta
 	
@@ -162,10 +169,17 @@ func update_rope():
 		return
 		
 	rope.visible = true
-	var dist = Global.player.global_position.distance_to(target_position)
+	
+	
+	var view_dir = (target_position - Global.player.camera.global_position).normalized()
+	var virtual_origin = target_position - view_dir * -0.01  # back it up slightly
+	
+	var dist = Global.player.global_position.distance_to(virtual_origin)
 	rope.look_at(target_position)
-	rope.scale = Vector3(1,1, dist)
-
+	rope.scale = Vector3(1,1, dist - .5)
+	
+	grapple_point_visual.look_at(virtual_origin, Vector3.UP)
+	
 
 func break_grappler():
 	is_grappling = false
@@ -173,7 +187,18 @@ func break_grappler():
 	
 
 func show_grappler_visual():
+	
+	# Match player's full 3D orientation
+	#grapple_point_visual.global_transform = Transform3D(
+		#Global.player.camera.global_transform.basis,
+		#pos
+	#)
+	
+	#grapple_point_visual.global_position = Global.player.global_position
+	#grapple_point_visual.look_at(target_position)
+		
 	grapple_point_visual.global_position = target_position
+	
 	grapple_point_visual.visible = true
 	
 func hide_grappler_visual():
