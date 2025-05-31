@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh5ly27gkyv5y"]
+[gd_scene load_steps=10 format=3 uid="uid://bh5ly27gkyv5y"]
 
 [ext_resource type="Script" uid="uid://bsjpyvutg8p06" path="res://Assets/Weapons/Shovel/shovel_weapon.gd" id="1_ygasu"]
 [ext_resource type="PackedScene" uid="uid://tdopvlvvjdia" path="res://Assets/Weapons/Shovel/shovel.glb" id="2_0j4be"]
+[ext_resource type="PackedScene" uid="uid://sub1txnrtw0v" path="res://Assets/Weapons/Shovel/grapple_rope.tscn" id="3_jgjy2"]
 [ext_resource type="PackedScene" uid="uid://q7gwvvdltf1o" path="res://Systems/Components/hitbox_component.tscn" id="3_u0any"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jgjy2"]
@@ -77,9 +78,10 @@ _data = {
 &"charge_up": SubResource("Animation_60o5a")
 }
 
-[node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("hitbox_component", "animation_player")]
+[node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("rope", "hitbox_component", "animation_player")]
 script = ExtResource("1_ygasu")
 grapple_reach = 50.0
+rope = NodePath("Visual/GrappleRope")
 weapon_position = Vector3(0.537, -0.507, -0.655)
 hitbox_component = NodePath("HitboxComponent")
 animation_player = NodePath("AnimationPlayer")
@@ -89,6 +91,9 @@ damage = 100.0
 
 [node name="shovel" parent="Visual" instance=ExtResource("2_0j4be")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="GrappleRope" parent="Visual" instance=ExtResource("3_jgjy2")]
+visible = false
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_u0any")]
 

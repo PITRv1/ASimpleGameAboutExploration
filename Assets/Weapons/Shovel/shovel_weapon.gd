@@ -5,9 +5,15 @@ extends BaseWeapon
 @export var max_charge_time : int = 3
 
 @export_category("Secondary Ability")
-@export var grapple_reach : float = 100
-@export var pull_force := 50.0
-@export var slack_radius: float = 3.0
+@export var grapple_reach := 10.0
+@export var rest_length := 2.0
+@export var stiffness := 3.0
+@export var damping := 2.0
+@export var break_offset_factor := .5
+@export var rope : Node3D
+
+var grapple_point_visual_scene : PackedScene = preload("res://Assets/Weapons/Shovel/grapple_point.tscn")
+var grapple_point_visual : Node3D
 
 var isHeld :bool = false
 var chargupTimer : float = 1.0
@@ -16,8 +22,9 @@ var is_grappling : bool = false
 var can_grapple : bool = false
 var max_grapple_radius: float
 
-var break_plane_normal: Vector3
-var initial_distance: float
+var breakplane_origin : Vector3
+var breakplane_normal : Vector3
+
 
 #========== This is a 2 state weapon its input action triggers both when pressing and releasing creating a chargeup system =========
 func attack():
@@ -33,8 +40,18 @@ func attack():
 	knockback_player()
 
 func ads():
+	if is_grappling:
+		is_grappling = false
+		break_grappler()
+		return
+		
 	fire_grappler()
 
+
+func _ready() -> void:
+	grapple_point_visual = grapple_point_visual_scene.instantiate()
+	Global.game_controller.current_3d_scene.add_child(grapple_point_visual)
+	hide_grappler_visual()
 
 func _process(delta: float) -> void:
 	if isHeld and chargupTimer < max_charge_time:
@@ -49,12 +66,8 @@ func _physics_process(delta: float) -> void:
 	else: 
 		Global.player.player_ui_controller.HUD.crosshair.draw_crosshair(Color.BLACK)
 
-		
-		
-	if not(is_grappling and target_position):
-		return
-		
 	pull_in_player(delta)
+	update_rope()
 	
 
 func knockback_player():
@@ -74,38 +87,97 @@ func fire_grappler():
 	var result := query_ray_ahead(grapple_reach)
 	if result:
 		target_position = result["position"]
-		initial_distance = Global.player.global_position.distance_to(target_position)
-		break_plane_normal = (target_position - Global.player.global_position).normalized()
-		max_grapple_radius = Global.player.global_position.distance_to(target_position) + slack_radius
+
+		var player_pos: Vector3 = Global.player.global_position
+		var target_pos: Vector3 = target_position
+
+		# Flatten positions onto XZ plane (ignore Y)
+		player_pos.y = 0
+		target_pos.y = 0
+
+		# Direction from player to target on XZ plane
+		var direction: Vector3 = (target_pos - player_pos).normalized()
+
+		# Distance from player to target
+		var distance: float = player_pos.distance_to(target_pos)
+
+		# Optional push beyond the target (default = 0.2 means 20% beyond)
+		var break_distance := distance * (1.0 + break_offset_factor)
+
+		# Breakplane origin: further along the player → target direction
+		breakplane_origin = player_pos + direction * break_distance
+
+		# Plane normal: still pointing from player → target direction
+		breakplane_normal = direction
+		
+		
+		
 		is_grappling = true
 		
-		var grapple_point_visual : Node3D = load("res://Assets/Weapons/Shovel/grapple_pointvisual.tscn").instantiate()
-		grapple_point_visual.global_position = target_position
-		Global.game_controller.current_3d_scene.add_child(grapple_point_visual)
-		
+		show_grappler_visual()
+
+
+
+
 
 func pull_in_player(delta):
-	var player_pos = Global.player.global_position
-	var to_target = (target_position - player_pos)
-	var current_distance  = to_target.length()
-
-	if current_distance > max_grapple_radius:
-		var direction_to_target = to_target.normalized()
-		var clamped_position = target_position - direction_to_target * max_grapple_radius
-		var correction_vector = clamped_position - player_pos
-		Global.player.velocity += correction_vector * pull_force * 100 * delta
-	else:
-		Global.player.velocity += to_target.normalized() * pull_force * delta
-
-	if current_distance < 5.0:
-		is_grappling = false
+	if !is_grappling or !target_position:
 		return
+	
+	var target_dir = Global.player.global_position.direction_to(target_position)
+	var target_dist = Global.player.global_position.distance_to(target_position)
+	
+	var displacement = target_dist - rest_length
+	var force := Vector3.ZERO
+	
+	if displacement > 0:
+		var spring_force_magnitude = stiffness * displacement
+		var spring_force = spring_force_magnitude * target_dir
+		
+		var vel_dot := Global.player.velocity.dot(target_dir)
+		var damping = -damping * vel_dot * target_dir
+		
+		force = spring_force + damping
+	
+	Global.player.velocity += force * delta
+	
+	# Break conditions
+	if target_dist < 5:
+		break_grappler()
+	
+	# Break if player moves over a plane vertical to the player start pos and the target point.
+	var current_pos = Global.player.global_position
+	current_pos.y = 0
 
-	var from_start_to_player = Global.player.global_position - target_position
-	var dot = break_plane_normal.dot(from_start_to_player)
-	if dot > 0:
-		is_grappling = false
+	var to_player = current_pos - breakplane_origin
+	var dot = breakplane_normal.dot(to_player)
+
+	if dot > 0.0:
+		break_grappler()
+		
+
+func update_rope():
+	if !is_grappling:
+		rope.visible = false
 		return
+		
+	rope.visible = true
+	var dist = Global.player.global_position.distance_to(target_position)
+	rope.look_at(target_position)
+	rope.scale = Vector3(1,1, dist)
+
+
+func break_grappler():
+	is_grappling = false
+	hide_grappler_visual()
+	
+
+func show_grappler_visual():
+	grapple_point_visual.global_position = target_position
+	grapple_point_visual.visible = true
+	
+func hide_grappler_visual():
+	grapple_point_visual.visible = false
 
 
 func query_ray_ahead(length) -> Dictionary:

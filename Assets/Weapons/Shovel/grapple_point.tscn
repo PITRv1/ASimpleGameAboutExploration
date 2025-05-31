@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjrajxpwbt8kb"]
+
+[ext_resource type="Shader" uid="uid://c785spb6drbgr" path="res://Assets/PostProcessingEffects/solidColor.gdshader" id="1_6shkh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_60o5a"]
+render_priority = 21
+shader = ExtResource("1_6shkh")
+shader_parameter/albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d0tgw"]
+material = SubResource("ShaderMaterial_60o5a")
+
+[node name="grapplePoint" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_d0tgw")

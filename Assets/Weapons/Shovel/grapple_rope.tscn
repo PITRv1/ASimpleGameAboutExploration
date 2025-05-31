@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://sub1txnrtw0v"]
+
+[ext_resource type="Shader" uid="uid://can6xdl3pkwju" path="res://Assets/PostProcessingEffects/perObjectDepthOutline.gdshader" id="1_b1wna"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1wna"]
+render_priority = 22
+shader = ExtResource("1_b1wna")
+shader_parameter/solid_color = Color(0.257257, 0.117973, 7.21961e-08, 1)
+shader_parameter/outline_threshold = 0.31
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wybfw"]
+top_radius = 0.05
+bottom_radius = 0.05
+
+[node name="GrappleRope" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+material_overlay = SubResource("ShaderMaterial_b1wna")
+mesh = SubResource("CylinderMesh_wybfw")
