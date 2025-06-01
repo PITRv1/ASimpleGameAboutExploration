@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7fwspf7yanp6"]
 
-[ext_resource type="PackedScene" uid="uid://b357c157nu0np" path="res://Assets/Weapons/Shovel/grapplerHead.glb" id="1_yed4a"]
+[ext_resource type="PackedScene" uid="uid://b357c157nu0np" path="res://Player/Grappler/grapplerHead.glb" id="1_yed4a"]
 [ext_resource type="Shader" uid="uid://can6xdl3pkwju" path="res://Assets/PostProcessingEffects/perObjectDepthOutline.gdshader" id="2_fecm7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cv4io"]

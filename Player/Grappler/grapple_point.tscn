@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjrajxpwbt8kb"]
 
-[ext_resource type="PackedScene" uid="uid://b7fwspf7yanp6" path="res://Assets/Weapons/Shovel/grappler_head_visual.tscn" id="1_6shkh"]
+[ext_resource type="PackedScene" uid="uid://b7fwspf7yanp6" path="res://Player/Grappler/grappler_head_visual.tscn" id="1_6shkh"]
 
 [node name="grapplePoint" type="Node3D"]
 

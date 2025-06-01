@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl1ou0c7oeuhn"
-path.s3tc="res://.godot/imported/lighHatch2.png-c6185d963aa36cd2a11f18928270e9c4.s3tc.ctex"
+uid="uid://co13hmps5smwf"
+path.s3tc="res://.godot/imported/grapplerHead_body_metal.png-8225e5572621a0f3acbc858b0b73f6fc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "ebc2ffc88538d9c27edb526a67e9f0ba"
+}
 
 [deps]
 
-source_file="res://Assets/Textures/CrossHatching/lighHatch2.png"
-dest_files=["res://.godot/imported/lighHatch2.png-c6185d963aa36cd2a11f18928270e9c4.s3tc.ctex"]
+source_file="res://Player/Grappler/grapplerHead_body_metal.png"
+dest_files=["res://.godot/imported/grapplerHead_body_metal.png-8225e5572621a0f3acbc858b0b73f6fc.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +23,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

@@ -52,9 +52,27 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+var resource = load("res://Assets/dialogues/quest_npc_dialogue.dialogue")
 
 func OpenInteractionDialogue():
 	is_turning = true
+
+	var dialogue_line = await resource.get_next_dialogue_line("start")
+	DialogueManager.show_dialogue_balloon(resource, "start")
+	
+	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
+	#DialogueManager.show_dialogue_balloon(resource, dialogue_line.next_id)
+	#
+	#
+	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
+	#print(dialogue_line.text)
+	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
+	#print(dialogue_line.text)
+	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
+	#print(dialogue_line.text)
+	
+	
+	
 	questGiver.giveQuest()
 
 

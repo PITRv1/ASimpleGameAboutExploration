@@ -1,9 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh5ly27gkyv5y"]
+[gd_scene load_steps=11 format=3 uid="uid://bh5ly27gkyv5y"]
 
 [ext_resource type="Script" uid="uid://bsjpyvutg8p06" path="res://Assets/Weapons/Shovel/shovel_weapon.gd" id="1_ygasu"]
 [ext_resource type="PackedScene" uid="uid://tdopvlvvjdia" path="res://Assets/Weapons/Shovel/shovel.glb" id="2_0j4be"]
-[ext_resource type="PackedScene" uid="uid://sub1txnrtw0v" path="res://Assets/Weapons/Shovel/grapple_rope.tscn" id="3_jgjy2"]
+[ext_resource type="Shader" uid="uid://c785spb6drbgr" path="res://Assets/PostProcessingEffects/solidColor.gdshader" id="3_jgjy2"]
 [ext_resource type="PackedScene" uid="uid://q7gwvvdltf1o" path="res://Systems/Components/hitbox_component.tscn" id="3_u0any"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_60o5a"]
+render_priority = 22
+shader = ExtResource("3_jgjy2")
+shader_parameter/albedo_color = Color(0, 0.745098, 1, 0.341176)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0tgw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jgjy2"]
 size = Vector3(0.317383, 0.619675, 0.272949)
@@ -55,33 +62,14 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-1.37532, 0, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_60o5a"]
-resource_name = "charge_up"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jgjy2"]
 _data = {
 &"RESET": SubResource("Animation_jgjy2"),
-&"attack": SubResource("Animation_u0any"),
-&"charge_up": SubResource("Animation_60o5a")
+&"attack": SubResource("Animation_u0any")
 }
 
-[node name="ShovelWeapon" type="Node3D" node_paths=PackedStringArray("rope", "hitbox_component", "animation_player")]
+[node name="Shword" type="Node3D" node_paths=PackedStringArray("hitbox_component", "animation_player")]
 script = ExtResource("1_ygasu")
-grapple_reach = 50.0
-rope = NodePath("Visual/GrappleRope")
 weapon_position = Vector3(0.3, -0.4, -0.6)
 hitbox_component = NodePath("HitboxComponent")
 animation_player = NodePath("AnimationPlayer")
@@ -92,8 +80,10 @@ damage = 100.0
 [node name="shovel" parent="Visual" instance=ExtResource("2_0j4be")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="GrappleRope" parent="Visual" instance=ExtResource("3_jgjy2")]
-visible = false
+[node name="Shield" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1.37666, 0, 0, 0, 1.58854, 0, 0, 0, 0.173104, 0.0659794, 0.226163, -0.874915)
+material_override = SubResource("ShaderMaterial_60o5a")
+mesh = SubResource("BoxMesh_d0tgw")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_u0any")]
 

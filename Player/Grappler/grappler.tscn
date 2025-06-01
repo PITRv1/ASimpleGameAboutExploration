@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://v326yoccaf7t"]
+
+[ext_resource type="Script" uid="uid://b8r2s3ynhs6j8" path="res://Player/Grappler/grappler.gd" id="1_odp5v"]
+[ext_resource type="PackedScene" uid="uid://sub1txnrtw0v" path="res://Player/Grappler/grapple_rope.tscn" id="1_wq26r"]
+
+[node name="Grappler" type="Node3D" node_paths=PackedStringArray("rope")]
+script = ExtResource("1_odp5v")
+grapple_reach = 60.0
+rest_length = 0.0
+rope = NodePath("GrappleRope")
+
+[node name="GrappleRope" parent="." instance=ExtResource("1_wq26r")]

@@ -5,11 +5,13 @@ signal onEscapePressed
 signal onInteractPressed
 signal onAttackPressed
 signal onAdsHeld
+signal onGrapplerFired
 
 @export var escapeAction : GUIDEAction
 @export var interactAction : GUIDEAction
 @export var attackAction : GUIDEAction
 @export var adsAction : GUIDEAction
+@export var grapplerAction : GUIDEAction
 
 
 func _ready() -> void:
@@ -18,6 +20,7 @@ func _ready() -> void:
 	
 	attackAction.triggered.connect(attackPressed)
 	adsAction.triggered.connect(adsPressed)
+	grapplerAction.triggered.connect(grapplerFired)
 
 func escapePressed():
 	onEscapePressed.emit()
@@ -31,3 +34,5 @@ func attackPressed():
 func adsPressed():
 	onAdsHeld.emit()
 	
+func grapplerFired():
+	onGrapplerFired.emit()

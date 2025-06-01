@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl1ou0c7oeuhn"
-path.s3tc="res://.godot/imported/lighHatch2.png-c6185d963aa36cd2a11f18928270e9c4.s3tc.ctex"
+uid="uid://bel8ba6hbyy5r"
+path.s3tc="res://.godot/imported/grapplerHead_body_metal_normals.png-0129bde1e10e9c2dce359f132e9efe85.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a2df2512ae04dbc253a272762bda827e"
+}
 
 [deps]
 
-source_file="res://Assets/Textures/CrossHatching/lighHatch2.png"
-dest_files=["res://.godot/imported/lighHatch2.png-c6185d963aa36cd2a11f18928270e9c4.s3tc.ctex"]
+source_file="res://Player/Grappler/grapplerHead_body_metal_normals.png"
+dest_files=["res://.godot/imported/grapplerHead_body_metal_normals.png-0129bde1e10e9c2dce359f132e9efe85.s3tc.ctex"]
 
 [params]
 
@@ -24,8 +27,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Player/Grappler/grapplerHead_body_metal_normals.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

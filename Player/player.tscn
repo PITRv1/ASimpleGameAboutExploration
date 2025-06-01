@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://nwtjv17dqyx5"]
+[gd_scene load_steps=32 format=3 uid="uid://nwtjv17dqyx5"]
 
 [ext_resource type="Script" uid="uid://7uppuaakdcvs" path="res://Player/main_player_script.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://dsef5yewsks8e" path="res://Player/UI/player_ui.tscn" id="2_4ntmi"]
@@ -11,11 +11,13 @@
 [ext_resource type="Resource" uid="uid://bfc5rykdwq62r" path="res://InputMappings/WeaponsInput.tres" id="5_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://dgyc7i8ilijod" path="res://Systems/InteractionSystem/interaction_initiator.tscn" id="5_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dbtycpiqx4u0m" path="res://Systems/Weapons system/weapon_controller.tscn" id="7_p5o4e"]
+[ext_resource type="PackedScene" uid="uid://v326yoccaf7t" path="res://Player/Grappler/grappler.tscn" id="9_gpjlu"]
 [ext_resource type="Resource" uid="uid://cveufc2cx61jb" path="res://InputMappings/interact.tres" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://b8pi107ysycby" path="res://Systems/Components/health_component.tscn" id="11_5htga"]
 [ext_resource type="PackedScene" uid="uid://m8aoy5c0varx" path="res://Systems/Components/hurtbox_component.tscn" id="12_p5o4e"]
 [ext_resource type="Resource" uid="uid://dah8042kwp2tk" path="res://InputMappings/attack.tres" id="14_lfmf2"]
 [ext_resource type="Resource" uid="uid://g3kescivuyi5" path="res://InputMappings/aim_down_sites.tres" id="15_pisgm"]
+[ext_resource type="Resource" uid="uid://bah0yflnxtifw" path="res://InputMappings/grappler.tres" id="16_8mwp6"]
 [ext_resource type="PackedScene" uid="uid://d28w1uawnetlh" path="res://Systems/Quest system/quest_tracker.tscn" id="18_b1ygp"]
 [ext_resource type="PackedScene" uid="uid://byqfgqgsdwbqe" path="res://Systems/Components/saveable_component.tscn" id="19_7emwf"]
 [ext_resource type="Script" uid="uid://boj8atskudkmk" path="res://Player/inventory.gd" id="19_o28un"]
@@ -99,6 +101,10 @@ inputHandeler = NodePath("../../../../Utilities/InputHandeler")
 [node name="WeaponController" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler") instance=ExtResource("7_p5o4e")]
 input_handeler = NodePath("../../../../Utilities/InputHandeler")
 
+[node name="Grappler" parent="Head/CameraSmooth/PlayerCamera" node_paths=PackedStringArray("input_handeler") instance=ExtResource("9_gpjlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280647, -0.508038, -0.839837)
+input_handeler = NodePath("../../../../Utilities/InputHandeler")
+
 [node name="StairsBelowRayCast" type="RayCast3D" parent="."]
 
 [node name="StairsAheadRayCast" type="RayCast3D" parent="."]
@@ -115,6 +121,7 @@ escapeAction = ExtResource("4_gwnis")
 interactAction = ExtResource("10_x3vf3")
 attackAction = ExtResource("14_lfmf2")
 adsAction = ExtResource("15_pisgm")
+grapplerAction = ExtResource("16_8mwp6")
 
 [node name="QuestTracker" parent="Utilities" instance=ExtResource("18_b1ygp")]
 

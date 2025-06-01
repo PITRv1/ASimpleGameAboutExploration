@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b357c157nu0np"
-path="res://.godot/imported/grapplerHead.glb-9a955fc7805c35761b96950b87e81b2f.scn"
+path="res://.godot/imported/grapplerHead.glb-381c74990b293fcad543d05208415ba7.scn"
 
 [deps]
 
-source_file="res://Assets/Weapons/Shovel/grapplerHead.glb"
-dest_files=["res://.godot/imported/grapplerHead.glb-9a955fc7805c35761b96950b87e81b2f.scn"]
+source_file="res://Player/Grappler/grapplerHead.glb"
+dest_files=["res://.godot/imported/grapplerHead.glb-381c74990b293fcad543d05208415ba7.scn"]
 
 [params]
 
