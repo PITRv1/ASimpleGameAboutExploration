@@ -1,10 +1,7 @@
 ~ start
-Quest Man: pa pa papam pa pa pa paaa paaa
-Quest Man: I got like a bunch a quests do ya want some?
-- Balls
-- nah mate
-- Balls
-- beta
-- skibidi
-- ohio
+Quest Man: [[Hi | Hello | Hey there]]!
+Quest Man: I've got some a quests do ya want some?
+- Sure give me one!
+	Quest Man: Alright then please go and do the SOMMIN!
+- Nah, cya!
 => END

@@ -14,6 +14,7 @@ class_name QuestNPC
 var terrain : Terrain3D
 
 func _ready() -> void:
+	DialogueManager.dialogue_ended.connect(setRunningDialogueFlag)
 	interactionReciver.OnInteractDetected.connect(OpenInteractionDialogue)
 	_find_terrain()
 	
@@ -54,27 +55,21 @@ func _physics_process(delta: float) -> void:
 
 var resource = load("res://Assets/dialogues/quest_npc_dialogue.dialogue")
 
+var dialogue_running : bool = false
 func OpenInteractionDialogue():
 	is_turning = true
-
-	var dialogue_line = await resource.get_next_dialogue_line("start")
+	if dialogue_running:
+		return
+		
+	dialogue_running = true
+	
 	DialogueManager.show_dialogue_balloon(resource, "start")
-	
-	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
-	#DialogueManager.show_dialogue_balloon(resource, dialogue_line.next_id)
-	#
-	#
-	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
-	#print(dialogue_line.text)
-	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
-	#print(dialogue_line.text)
-	#dialogue_line = await resource.get_next_dialogue_line(dialogue_line.next_id)
-	#print(dialogue_line.text)
-	
 	
 	
 	questGiver.giveQuest()
 
+func setRunningDialogueFlag(somming : DialogueResource):
+	dialogue_running = false
 
 func is_looking_at(target: Node3D, max_angle_deg: float = 20.0) -> bool:
 	var forward = -global_transform.basis.z.normalized()

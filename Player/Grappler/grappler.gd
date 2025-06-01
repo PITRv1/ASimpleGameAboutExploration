@@ -135,7 +135,7 @@ func update_rope():
 	rope.look_at(target_position)
 	rope.scale = Vector3(1,1, dist - .5)
 	
-	grapple_point_visual.look_at(virtual_origin, Vector3.UP)
+	grapple_point_visual.look_at_from_position(Global.player.global_position, target_position)
 	
 
 func break_grappler():
